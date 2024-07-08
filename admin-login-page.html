@@ -12,7 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <center>
+    <!-- <center>
       <div class="container">
         <center>
           <h1>Admin Login</h1>
@@ -50,7 +50,33 @@
           </div>
         </form>
       </div>
-    </center>
+    </center> -->
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <center>
+            <br />
+            <br />
+            <h1>Admin Login</h1>
+          </center>
+          <form action="admin-dashboard-page.html">
+            <div class="form-group">
+              <label for="usr">Username:</label>
+              <input type="text" class="form-control" id="usr" />
+            </div>
+            <div class="form-group">
+              <label for="pwd">Password:</label>
+              <input type="password" class="form-control" id="pwd" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              Login
+            </button>
+          </form>
+          <br />
+        </div>
+      </div>
+    </div>
 
     <!-- Login - Go to <a href="admin-dashboard-page.html">Admin Dashboard</a> -->
   </body>
