@@ -4,8 +4,37 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Delete Train</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
-    Go back - Go to <a href="admin-dashboard-page.html">Admin Dashboard</a>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <center>
+            <br />
+            <br />
+            <h1>Delete Train</h1>
+          </center>
+          <form action="admin-dashboard-page.html">
+            <div class="form-group">
+              <label for="trainName">Train Number:</label>
+              <input type="text" class="form-control" id="trainName" />
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+              Delete Train
+            </button>
+          </form>
+          <br />
+        </div>
+      </div>
+    </div>
+
+    <!-- Go back - Go to <a href="admin-dashboard-page.html">Admin Dashboard</a> -->
   </body>
 </html>
