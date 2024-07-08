@@ -4,9 +4,87 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ticket Search Page</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
-    Found - Go to <a href="login-page.html">Login Page</a><br />
-    Not Found - Go to <a href="main-page.html">Main Page</a>
+    <br />
+    <div class="container">
+      <h1>Search</h1>
+      <form action="login-page.html">
+        <div class="row">
+          <div class="col-sm-6">
+            <label for="pwd">From:</label>
+            <div class="dropdown">
+              <button
+                class="btn btn-default dropdown-toggle"
+                type="button"
+                data-toggle="dropdown"
+                style="
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                City <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" style="width: 100%">
+                <li><a href="#">Chennai</a></li>
+                <li><a href="#">Bangalore</a></li>
+                <li><a href="#">Delhi</a></li>
+                <li><a href="#">Mumbai</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="pwd">To:</label>
+            <div class="dropdown">
+              <button
+                class="btn btn-default dropdown-toggle"
+                type="button"
+                data-toggle="dropdown"
+                style="
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                "
+              >
+                City <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" style="width: 100%">
+                <li><a href="#">Chennai</a></li>
+                <li><a href="#">Bangalore</a></li>
+                <li><a href="#">Delhi</a></li>
+                <li><a href="#">Mumbai</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-sm-3">
+            <input type="date" class="form-control" id="usr" />
+          </div>
+          <div class="col-sm-9">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="alert alert-danger">Train not found!</div>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Found - Go to <a href="login-page.html">Login Page</a><br />
+    Not Found - Go to <a href="main-page.html">Main Page</a> -->
   </body>
 </html>
