@@ -20,7 +20,7 @@
             <br />
             <h1>Passenger Details</h1>
           </center>
-          <form action="user-dashboard-page.html">
+          <form action="payment-page.html">
             <div class="form-group">
               <label for="email">Email ID:</label>
               <input type="text" class="form-control" id="email" />
@@ -42,41 +42,21 @@
               <input type="text" class="form-control" id="age" />
             </div>
             <!-- Can u add equal space between each of button -->
-            <label class="radio-inline">
-              <input type="radio" name="male" checked />
-              Male
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="female" />
-              Female
-            </label>
-            <label class="radio-inline">
-              <input type="radio" name="transgender" />
-              Transgender
-            </label>
-            <br />
-            <br />
             <div class="form-group">
-              <label for="pay">Mode of Payment</label>
-              <div class="dropdown">
-                <button
-                  class="btn btn-default dropdown-toggle"
-                  type="button"
-                  id="pay"
-                  data-toggle="dropdown"
-                  style="
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  "
-                >
-                  Mode of Payment <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" style="width: 100%">
-                  <li><a href="#">UPI</a></li>
-                  <li><a href="#">Net Banking</a></li>
-                </ul>
+              <label for="gender-group">Gender</label>
+              <div id="gender-group">
+                <label class="radio-inline">
+                  <input type="radio" name="male" checked />
+                  Male
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="female" />
+                  Female
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="transgender" />
+                  Transgender
+                </label>
               </div>
             </div>
             <div class="checkbox">
