@@ -4,9 +4,87 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard Page</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
-    Create Train - Go to <a href="create-train-page.html">Create Train Page</a
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="pull-right">
+            <br />
+            <a href="main-page.html">
+              <button type="button" class="btn btn-primary">Logout</button>
+            </a>
+          </div>
+          <h1 class="mt-4">
+            Good Morning, Sahil
+            <small class="text-muted">(Admin Dashboard)</small>
+          </h1>
+          <div class="mt-4">
+            <br />
+            <a href="create-train-page.html">
+              <button type="button" class="btn btn-primary">
+                + Create Train
+              </button>
+            </a>
+            <a href="view-booked-ticket-page.html">
+              <button type="button" class="btn btn-primary">
+                View Booked Ticket
+              </button>
+            </a>
+            <a href="delete-train-page.html">
+              <button type="button" class="btn btn-primary">
+                Delete Train
+              </button>
+            </a>
+            <a href="edit-train-page.html">
+              <button type="button" class="btn btn-primary">Edit Train</button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+
+    <div class="container mt-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-6">
+              <h2>Satabdi Express <small class="text-muted">#1234</small></h2>
+              <br />
+              <div class="row">
+                <div class="col-xs-6">
+                  <small>From:</small>
+                  <p class="lead"><strong>New Delhi</strong></p>
+                </div>
+                <div class="col-xs-6">
+                  <small>To:</small>
+                  <p class="lead"><strong>Bangalore</strong></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <br />
+              <p>Train Date: 6 July 2024</p>
+              <p class="lead">
+                Train Time
+                <span class="text-primary" style="font-size: 42px"
+                  ><strong>9:30 AM</strong></span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Train - Go to <a href="create-train-page.html">Create Train Page</a
     ><br />
 
     View Booked Ticket - Go to
@@ -17,6 +95,6 @@
 
     Delete Train - Go to <a href="delete-train-page.html">Delete Train</a><br />
 
-    Logout - Go to <a href="main-page.html">Logout</a>
+    Logout - Go to <a href="main-page.html">Logout</a> -->
   </body>
 </html>
