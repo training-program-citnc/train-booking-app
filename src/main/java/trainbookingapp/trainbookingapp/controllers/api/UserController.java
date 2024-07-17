@@ -3,6 +3,7 @@ package trainbookingapp.trainbookingapp.controllers.api;
 import java.lang.Iterable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import trainbookingapp.trainbookingapp.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api")
-public class LoginController {
+public class UserController {
 
   @Autowired
   private UserRepository userRepository;
@@ -38,6 +39,17 @@ public class LoginController {
     Response response = new Response();
     response.message = "Usernaem or Password is incorrect";
     response.status = 400;
+    return response;
+  }
+
+  // QUERY
+  // http://localhost:8080/api/register?username=dusklight00&firstName=dusk&lastName=light&email=r.rahul.developer@gmail.com&mobileNumber=999&address=boston&city=bangalore&state=karnataka&password=password&aadhar=999&pincode=123&gender=male
+  @GetMapping(path = "/register")
+  public Response login(@ModelAttribute User user) {
+    userRepository.save(user);
+    Response response = new Response();
+    response.message = "Registration Successful";
+    response.status = 200;
     return response;
   }
 }

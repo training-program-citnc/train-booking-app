@@ -41,7 +41,7 @@ public class MainController {
     return "edit-train-page.html";
   }
 
-  @GetMapping("/forgot-password-page")
+  @GetMapping("/forgot-password")
   public String forgotPasswordPage() {
     return "forgot-password-page.html";
   }
