@@ -20,30 +20,14 @@
             <br />
             <h1>Login</h1>
           </center>
-          <!-- <form action="user-dashboard-page.html"> -->
-          <form
-            action="#"
-            th:action="@{/login}"
-            th:object="${user}"
-            method="post"
-          >
+          <form action="user-dashboard-page.html">
             <div class="form-group">
               <label for="usr">Username:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="usr"
-                th:field="*{username}"
-              />
+              <input type="text" class="form-control" id="usr" />
             </div>
             <div class="form-group">
               <label for="pwd">Password:</label>
-              <input
-                type="password"
-                class="form-control"
-                id="pwd"
-                th:field="*{password}"
-              />
+              <input type="password" class="form-control" id="pwd" />
             </div>
             <div class="form-group text-right">
               <a href="forgot-password-page.html">Forgot password?</a>
@@ -56,8 +40,7 @@
               <br />
               <center>
                 If new user? <br />
-                <!-- <a href="user-register-page.html"> -->
-                <a th:href="@{register}">
+                <a href="user-register-page.html">
                   <button type="button" class="btn btn-link">
                     Register Here
                   </button>
@@ -65,10 +48,6 @@
               </center>
             </div>
           </form>
-          <!-- Add conditional rendering for this alert -->
-          <div class="alert alert-danger" th:if="${param.error}">
-            <strong>Error!</strong> Incorrect username or password
-          </div>
           <br />
         </div>
       </div>

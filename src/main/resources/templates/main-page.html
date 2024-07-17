@@ -16,19 +16,19 @@
       <h1>Welcome to Train Booking Application</h1>
       <br />
       <br />
-      <img src="assets/pray.png" alt="pray-icon" />
+      <img th:src="@{assets/pray.png}" alt="pray-icon" />
       <br />
       <br />
       <br />
       <div>
-        <a href="admin-login-page.html">
+        <a href="@{admin-login}">
           <button type="button" class="btn btn-primary">Admin</button>
         </a>
         <!-- <a href="user-login-page.html"> -->
-        <a th:href="@{login}"></a>
+        <a th:href="@{user-login}">
           <button type="button" class="btn btn-success">User</button>
         </a>
-        <a href="ticket-search.html">
+        <a href="@{ticket-search}">
           <button type="button" class="btn btn-warning">Ticket (Search)</button>
         </a>
       </div>

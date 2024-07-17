@@ -107,14 +107,19 @@
             </div>
             <br />
             <a th:href="@{/createTrain}">
-              <button type="button" class="btn btn-link">
-                Register Here
-              </button>
+              <button type="button" class="btn btn-link">Register Here</button>
             </a>
           </form>
           <br />
         </div>
       </div>
     </div>
+    <script>
+      function handlesubmit(e) {
+        e.preventDefault();
+
+        alert("Login Successful");
+      }
+    </script>
   </body>
 </html>
