@@ -9,7 +9,7 @@ public class User {
   @Id
   private String aadhar_card;
 
-  private String username, first_name, last_name, email_id, mobile_number, address, city, state, password;
+  private String username, first_name, last_name, email_id, mobile_number, address, city, state, password, gender;
 
   private int pincode;
 
@@ -99,5 +99,13 @@ public class User {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
   }
 }
