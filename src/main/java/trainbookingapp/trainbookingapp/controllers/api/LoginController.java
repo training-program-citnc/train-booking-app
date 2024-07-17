@@ -6,14 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import trainbookingapp.trainbookingapp.Response;
 import trainbookingapp.trainbookingapp.entity.User;
 import trainbookingapp.trainbookingapp.repository.UserRepository;
-
-class LoginResponse {
-
-  public String message;
-  public String status;
-}
 
 @RestController
 @RequestMapping("/api")
@@ -23,7 +18,7 @@ public class LoginController {
   private UserRepository userRepository;
 
   @GetMapping(path = "/login")
-  public LoginResponse login(
+  public Response login(
     @RequestParam String username,
     @RequestParam String password
   ) {
@@ -34,15 +29,15 @@ public class LoginController {
         user.getUsername().equals(username) &&
         user.getPassword().equals(password)
       ) {
-        LoginResponse response = new LoginResponse();
+        Response response = new Response();
         response.message = "Login Successful";
-        response.status = "200";
+        response.status = 200;
         return response;
       }
     }
-    LoginResponse response = new LoginResponse();
+    Response response = new Response();
     response.message = "Usernaem or Password is incorrect";
-    response.status = "400";
+    response.status = 400;
     return response;
   }
 }
