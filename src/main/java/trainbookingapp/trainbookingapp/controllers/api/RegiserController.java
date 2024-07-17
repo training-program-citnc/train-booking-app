@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import trainbookingapp.trainbookingapp.entity.User;
 import trainbookingapp.trainbookingapp.repository.UserRepository;
 
+// QUERY
+// http://localhost:8080/api/register?username=dusklight00&firstName=dusk&lastName=light&email=r.rahul.developer@gmail.com&mobileNumber=999&address=boston&city=bangalore&state=karnataka&password=password&aadhar=999&pincode=123&gender=male
+
 class RegisterResponse {
 
   public String message;
@@ -27,7 +30,7 @@ public class RegiserController {
     userRepository.save(user);
     RegisterResponse response = new RegisterResponse();
     response.message = "Registration Successful";
-    response.status = "success";
+    response.status = "200";
     return response;
   }
 }
