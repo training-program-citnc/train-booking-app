@@ -1,4 +1,4 @@
-package trainbookingapp.trainbookingapp.controllers;
+package trainbookingapp.trainbookingapp.controllers.api;
 
 import java.lang.Iterable;
 import org.springframework.beans.factory.annotation.Autowired;
