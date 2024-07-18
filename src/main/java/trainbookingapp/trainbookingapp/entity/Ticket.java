@@ -9,18 +9,17 @@ public class Ticket {
   @Id
   String pnr;
 
-  String train_name;
   String train_id;
-  String date;
-  String source;
-  String destination;
-  String time;
+  String payment_method;
+  int amount;
+  String passenger_email;
+  String passenger_mobile_number;
 
-  public String getPNR() {
+  public String getPnr() {
     return pnr;
   }
 
-  public void setPNR(String pnr) {
+  public void setPnr(String pnr) {
     this.pnr = pnr;
   }
 
@@ -32,43 +31,35 @@ public class Ticket {
     this.train_id = train_id;
   }
 
-  public String getTrainName() {
-    return train_name;
+  public String getPaymentMethod() {
+    return payment_method;
   }
 
-  public void setTrainName(String train_name) {
-    this.train_name = train_name;
+  public void setPaymentMethod(String payment_method) {
+    this.payment_method = payment_method;
   }
 
-  public String getSource() {
-    return source;
+  public int getAmount() {
+    return amount;
   }
 
-  public void setSource(String source) {
-    this.source = source;
+  public void setAmount(int amount) {
+    this.amount = amount;
   }
 
-  public String getDestination() {
-    return destination;
+  public String getPassengerEmail() {
+    return passenger_email;
   }
 
-  public void setDestination(String destination) {
-    this.destination = destination;
+  public void setPassengerEmail(String passenger_email) {
+    this.passenger_email = passenger_email;
   }
 
-  public String getDate() {
-    return date;
+  public String getPassengerMobileNumber() {
+    return passenger_mobile_number;
   }
 
-  public void setDate(String date) {
-    this.date = date;
-  }
-
-  public String getTime() {
-    return time;
-  }
-
-  public void setTime(String time) {
-    this.time = time;
+  public void setPassengerMobileNumber(String passenger_mobile_number) {
+    this.passenger_mobile_number = passenger_mobile_number;
   }
 }

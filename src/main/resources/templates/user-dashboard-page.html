@@ -43,15 +43,120 @@
       </div>
     </div>
 
-    <!-- Book Ticket - Go to <a href="book-ticket-page.html">Book Ticket Page</a
-    ><br />
+    <div class="container mt-4">
+      <h2>Your Booked Tickets</h2>
+      <div id="booked-tickets-container"></div>
+    </div>
 
-    View Booked Ticket - Go to
-    <a href="view-booked-ticket-page.html">View Booked Ticket Page</a><br />
+    <script>
+      function createBookedTicketElement(
+        pnr,
+        passenger_name,
+        train_name,
+        from,
+        to,
+        date,
+        time,
+        seat_number
+      ) {
+        const ticketDetails = document.createElement("div");
+        ticketDetails.className = "col-md-12";
+        ticketDetails.style.border = "1px solid #ddd";
+        ticketDetails.style.borderRadius = "5px";
+        ticketDetails.style.padding = "15px";
+        ticketDetails.style.marginBottom = "20px";
 
-    Cancel Ticket - Go to
-    <a href="cancel-ticket-page.html">Cancel Ticket Page</a><br />
+        ticketDetails.innerHTML = `
+          <h3>Booked Ticket <small class="text-muted">PNR: ${pnr}</small></h3>
+          <div class="row">
+            <div class="col-xs-6">
+              <small>Passenger Name:</small>
+              <p class="lead"><strong>${passenger_name}</strong></p>
+            </div>
+            <div class="col-xs-6">
+              <small>Train:</small>
+              <p class="lead"><strong>${train_name}</strong></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <small>From:</small>
+              <p><strong>${from}</strong></p>
+            </div>
+            <div class="col-xs-6">
+              <small>To:</small>
+              <p><strong>${to}</strong></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-3">
+              <small>Date:</small>
+              <p>${date}</p>
+            </div>
+            <div class="col-xs-3">
+              <small>Time:</small>
+              <p><strong>${time}</strong></p>
+            </div>
+            <div class="col-xs-3">
+              <small>Seat:</small>
+              <p class="text-primary" style="font-size: 18px"><strong>${seat_number}</strong></p>
+            </div>
+            <div class="col-xs-3">
+              <small>PNR:</small>
+              <p class="text-success" style="font-size: 18px"><strong>${pnr}</strong></p>
+            </div>
+          </div>
+        `;
 
-    Logout - Go to <a href="main-page.html">Logout</a> -->
+        return ticketDetails;
+      }
+
+      function displayBookedTicket(
+        pnr,
+        passenger_name,
+        train_name,
+        from,
+        to,
+        date,
+        time,
+        seat_number
+      ) {
+        const container = document.getElementById("booked-tickets-container");
+        const ticketElement = createBookedTicketElement(
+          pnr,
+          passenger_name,
+          train_name,
+          from,
+          to,
+          date,
+          time,
+          seat_number
+        );
+        container.appendChild(ticketElement);
+      }
+
+      function generatePNR() {
+        return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+      }
+
+      function updateBookedTicketsDisplay() {
+        const container = document.getElementById("booked-tickets-container");
+        container.innerHTML = ""; // Clear previous content
+
+        //displayBookedTicket(generatePNR(), 'Sahil', 'Satabadi', 'Chennai', 'Bangalore', '2024-07-20', '14:30', 'A23');
+        displayBookedTicket(
+          generatePNR(),
+          "Rahul",
+          "Rajdhani Express",
+          "Delhi",
+          "Mumbai",
+          "2024-07-21",
+          "16:45",
+          "B12"
+        );
+      }
+
+      document.addEventListener("DOMContentLoaded", updateBookedTicketsDisplay);
+    </script>
   </body>
 </html>
