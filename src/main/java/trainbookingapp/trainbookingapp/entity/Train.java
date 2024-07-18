@@ -2,8 +2,6 @@ package trainbookingapp.trainbookingapp.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import java.sql.Date;
-import java.sql.Time;
 
 @Entity
 public class Train {

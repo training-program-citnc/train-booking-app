@@ -1,0 +1,6 @@
+package trainbookingapp.trainbookingapp.repository;
+
+import org.springframework.data.repository.CrudRepository;
+import trainbookingapp.trainbookingapp.entity.Ticket;
+
+public interface TicketRepository extends CrudRepository<Ticket, String> {}
