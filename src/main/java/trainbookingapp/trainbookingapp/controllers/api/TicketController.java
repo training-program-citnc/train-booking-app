@@ -4,10 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import trainbookingapp.trainbookingapp.Response;
 import trainbookingapp.trainbookingapp.entity.Ticket;
+import trainbookingapp.trainbookingapp.entity.User;
+import trainbookingapp.trainbookingapp.entity.UserTicket;
 import trainbookingapp.trainbookingapp.repository.TicketRepository;
+import trainbookingapp.trainbookingapp.repository.UserRepository;
+import trainbookingapp.trainbookingapp.repository.UserTicketRepository;
 
 @RestController
 @RequestMapping("/api")
@@ -15,6 +20,9 @@ public class TicketController {
 
   @Autowired
   private TicketRepository ticketRepository;
+
+  @Autowired
+  private UserTicketRepository userTicketRepository;
 
   // QUERY
   // http://localhost:8080/api/create-ticket?pnr=123&trainId=123&paymentMethod=netbanking&amount=2500&passengerEmail=r.rahul.developer@gmail.com&passengerMobileNumber=8002030975
@@ -27,9 +35,38 @@ public class TicketController {
     return response;
   }
 
+  // QUERY
+  // http://localhost:8080/api/add-user?aadhar=999&pnr=123
+  @GetMapping("/add-user")
+  public Response addUser(@ModelAttribute UserTicket userTicket) {
+    userTicketRepository.save(userTicket);
+    Response response = new Response();
+    response.message = "User Ticket Created Successfully";
+    response.status = 200;
+    return response;
+  }
+
   @GetMapping("/all-ticket")
   public Iterable<Ticket> allTicket() {
     Iterable<Ticket> iterable = ticketRepository.findAll();
     return iterable;
+  }
+
+  // TODO - Research on what is the difference between Optional and Iterable
+
+  // QUERY
+  // http://localhost:8080/api/get-user-ticket?aadhar_card=999
+  @GetMapping("/get-user-ticket")
+  public Iterable<UserTicket> getUserTicket(@RequestParam String aadhar_card) {
+    Iterable<UserTicket> userTicket = userTicketRepository.findAllByAadhar(
+      aadhar_card
+    );
+    return userTicket;
+  }
+
+  @GetMapping("/get-ticket")
+  public Ticket getTicket(@RequestParam String pnr) {
+    Ticket ticket = ticketRepository.findByPnr(pnr);
+    return ticket;
   }
 }

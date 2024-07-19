@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 public class User {
 
   @Id
-  private String aadhar_card;
+  private String aadhar;
 
   private String username, first_name, last_name, email_id, mobile_number, address, city, state, password, gender;
 
@@ -38,11 +38,11 @@ public class User {
   }
 
   public String getAadhar() {
-    return aadhar_card;
+    return aadhar;
   }
 
-  public void setAadhar(String aadhar_card) {
-    this.aadhar_card = aadhar_card;
+  public void setAadhar(String aadhar) {
+    this.aadhar = aadhar;
   }
 
   public String getEmail() {

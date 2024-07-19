@@ -37,7 +37,7 @@ public class UserController {
       }
     }
     Response response = new Response();
-    response.message = "Usernaem or Password is incorrect";
+    response.message = "Username or Password is incorrect";
     response.status = 400;
     return response;
   }
@@ -51,5 +51,11 @@ public class UserController {
     response.message = "Registration Successful";
     response.status = 200;
     return response;
+  }
+
+  @GetMapping(path = "/get-user")
+  public User getUser(@RequestParam String aadhar) {
+    User user = userRepository.findByAadhar(aadhar);
+    return user;
   }
 }

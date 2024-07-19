@@ -4,4 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import trainbookingapp.trainbookingapp.entity.UserTicket;
 
 public interface UserTicketRepository
-  extends CrudRepository<UserTicket, String> {}
+  extends CrudRepository<UserTicket, Integer> {
+  public Iterable<UserTicket> findAllByAadhar(String aadhar);
+}

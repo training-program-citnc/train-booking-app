@@ -1,29 +1,34 @@
 package trainbookingapp.trainbookingapp.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class UserTicket {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  Integer userTicketId;
+
   String pnr;
 
-  String aadhar_card;
+  String aadhar;
 
-  public String getPNR() {
+  public String getPnr() {
     return pnr;
   }
 
-  public void setPNR(String pnr) {
+  public void setPnr(String pnr) {
     this.pnr = pnr;
   }
 
   public String getAadhar() {
-    return aadhar_card;
+    return aadhar;
   }
 
-  public void setAadhar(String aadhar_card) {
-    this.aadhar_card = aadhar_card;
+  public void setAadhar(String aadhar) {
+    this.aadhar = aadhar;
   }
 }
