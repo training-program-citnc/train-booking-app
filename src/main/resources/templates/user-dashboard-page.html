@@ -32,11 +32,7 @@
         <a href="book-ticket-page.html">
           <button type="button" class="btn btn-primary">Book Tickets</button>
         </a>
-        <a href="view-booked-detail-page.html">
-          <button type="button" class="btn btn-primary">
-            View Booked Ticket
-          </button>
-        </a>
+
         <a href="cancel-ticket-page.html">
           <button type="button" class="btn btn-primary">Cancel Ticket</button>
         </a>
@@ -57,7 +53,8 @@
         to,
         date,
         time,
-        seat_number
+        seat_number,
+        all_passengers
       ) {
         const ticketDetails = document.createElement("div");
         ticketDetails.className = "col-md-12";
@@ -66,6 +63,17 @@
         ticketDetails.style.padding = "15px";
         ticketDetails.style.marginBottom = "20px";
 
+        let passengerDropdownItems = all_passengers
+          .map(
+            (passenger) => `
+            <li>
+              <a class="dropdown-item" href="#">
+                ${passenger}
+              </a>
+            </li>
+          `
+          )
+          .join("");
         ticketDetails.innerHTML = `
           <h3>Booked Ticket <small class="text-muted">PNR: ${pnr}</small></h3>
           <div class="row">
@@ -73,6 +81,8 @@
               <small>Passenger Name:</small>
               <p class="lead"><strong>${passenger_name}</strong></p>
             </div>
+          </div>
+          <div class="row">
             <div class="col-xs-6">
               <small>Train:</small>
               <p class="lead"><strong>${train_name}</strong></p>
@@ -106,6 +116,25 @@
               <p class="text-success" style="font-size: 18px"><strong>${pnr}</strong></p>
             </div>
           </div>
+          <div class="row">
+            <div class="col-xs-6">
+              <a href="view-booked-detail-page.html">
+                <button type="button" class="btn btn-primary">
+                  View Booked Ticket
+                </button>
+              </a>
+            </div>
+            <div class="col-xs-6 text-right">
+              <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="passengerDropdown_${pnr}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Ticket Booked by: ${passenger_name}
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="passengerDropdown_${pnr}">
+                  ${passengerDropdownItems}
+                </ul>
+              </div>
+            </div>
+          </div>
         `;
 
         return ticketDetails;
@@ -119,7 +148,8 @@
         to,
         date,
         time,
-        seat_number
+        seat_number,
+        all_passengers
       ) {
         const container = document.getElementById("booked-tickets-container");
         const ticketElement = createBookedTicketElement(
@@ -130,7 +160,8 @@
           to,
           date,
           time,
-          seat_number
+          seat_number,
+          all_passengers
         );
         container.appendChild(ticketElement);
       }
@@ -142,8 +173,6 @@
       function updateBookedTicketsDisplay() {
         const container = document.getElementById("booked-tickets-container");
         container.innerHTML = ""; // Clear previous content
-
-        //displayBookedTicket(generatePNR(), 'Sahil', 'Satabadi', 'Chennai', 'Bangalore', '2024-07-20', '14:30', 'A23');
         displayBookedTicket(
           generatePNR(),
           "Rahul",
@@ -152,7 +181,8 @@
           "Mumbai",
           "2024-07-21",
           "16:45",
-          "B12"
+          "B12",
+          ["Rahul", "Sahil", "Sam"]
         );
       }
 

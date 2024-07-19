@@ -20,7 +20,7 @@
             <br />
             <h1>Login</h1>
           </center>
-          <form action="user-dashboard-page.html">
+          <form id="loginForm">
             <div class="form-group">
               <label for="usr">Username:</label>
               <input type="text" class="form-control" id="usr" />
@@ -32,7 +32,6 @@
             <div class="form-group text-right">
               <a href="forgot-password-page.html">Forgot password?</a>
             </div>
-
             <button type="submit" class="btn btn-primary btn-block">
               Login
             </button>
@@ -49,15 +48,45 @@
             </div>
           </form>
           <br />
+          <div id="errorContainer" class="text-center"></div>
+          <div id="messageContainer" class="text-center"></div>
         </div>
       </div>
     </div>
 
-    <!-- Register - Go to <a href="user-register-page.html">User Register Page</a
-    ><br />
-    Login - Go to <a href="user-dashboard-page.html">User Dashboard Page</a
-    ><br />
-    Forgot Password - Go to
-    <a href="forgot-password-page.html">Forgot Password</a> -->
+    <script>
+      $(document).ready(function () {
+        $("#loginForm").submit(function (e) {
+          e.preventDefault();
+          const username = $("#usr").val();
+          const password = $("#pwd").val();
+
+          $.get(
+            `/api/login?username=${username}&password=${password}`,
+            function (data, status) {
+              if (data.status === 200) {
+                $("#messageContainer").html(`
+                <div class="alert alert-success">
+                  <strong>Success!</strong> Logged in successfully.
+                </div>
+              `);
+              } else {
+                $("#messageContainer").html(`
+                <div class="alert alert-danger">
+                  <strong>Error!</strong> Invalid username or password.
+                </div>
+              `);
+              }
+            }
+          ).fail(function () {
+            $("#messageContainer").html(`
+              <div class="alert alert-danger">
+                <strong>Error!</strong> Unable to connect to the server. Please try again later.
+              </div>
+            `);
+          });
+        });
+      });
+    </script>
   </body>
 </html>
