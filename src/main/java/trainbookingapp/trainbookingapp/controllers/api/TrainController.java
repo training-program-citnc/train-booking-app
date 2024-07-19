@@ -18,7 +18,7 @@ public class TrainController {
   private TrainRepository trainRepository;
 
   // QUERY
-  // http://localhost:8080/api/create-train?trainName=dusky_train&trainNumber=212&source=patna&destination=bangalore&departureDate=17-07-2024&departureTime=23:41
+  // http://localhost:8080/api/create-train?trainName=dusky_train&trainNumber=212&source=patna&destination=bangalore&date=17-07-2024&time=23:41
   @GetMapping("/create-train")
   public Response createTrain(@ModelAttribute Train train) {
     trainRepository.save(train);
@@ -51,5 +51,18 @@ public class TrainController {
   @GetMapping("/all-trains")
   public Iterable<Train> allTrains() {
     return trainRepository.findAll();
+  }
+
+  @GetMapping("/search-ticket")
+  public Iterable<Train> searchTicket(
+    @RequestParam String source,
+    @RequestParam String destination,
+    @RequestParam String date
+  ) {
+    return trainRepository.findAllBySourceAndDestinationAndDate(
+      source,
+      destination,
+      date
+    );
   }
 }

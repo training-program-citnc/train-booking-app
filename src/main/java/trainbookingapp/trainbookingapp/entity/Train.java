@@ -12,8 +12,8 @@ public class Train {
   private String train_name;
   private String source;
   private String destination;
-  private String departure_date;
-  private String departure_time;
+  private String date;
+  private String time;
 
   public String getTrainNumber() {
     return train_number;
@@ -49,19 +49,19 @@ public class Train {
 
   // TODO : these String can be parsed into Date using SimpleDateFormat
 
-  public String getDepartureDate() {
-    return departure_date;
+  public String getDate() {
+    return date;
   }
 
-  public void setDepartureDate(String departure_date) {
-    this.departure_date = departure_date;
+  public void setDate(String date) {
+    this.date = date;
   }
 
-  public String getDepartureTime() {
-    return departure_time;
+  public String getTime() {
+    return time;
   }
 
-  public void setDepartureTime(String departure_time) {
-    this.departure_time = departure_time;
+  public void setDepartureTime(String time) {
+    this.time = time;
   }
 }

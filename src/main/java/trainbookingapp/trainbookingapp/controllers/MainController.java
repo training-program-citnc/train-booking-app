@@ -2,6 +2,7 @@ package trainbookingapp.trainbookingapp.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainController {
@@ -94,5 +95,10 @@ public class MainController {
   @GetMapping("/view-booked-ticket")
   public String viewBookedTicketPage() {
     return "view-booked-ticket-page.html";
+  }
+
+  @GetMapping("/admin-dashboard")
+  public String adminDasboard() {
+    return "admin-dashboard-page.html";
   }
 }
