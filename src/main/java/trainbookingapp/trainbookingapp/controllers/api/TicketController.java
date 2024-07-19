@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import trainbookingapp.trainbookingapp.Response;
 import trainbookingapp.trainbookingapp.entity.Ticket;
-import trainbookingapp.trainbookingapp.entity.User;
 import trainbookingapp.trainbookingapp.entity.UserTicket;
 import trainbookingapp.trainbookingapp.repository.TicketRepository;
-import trainbookingapp.trainbookingapp.repository.UserRepository;
 import trainbookingapp.trainbookingapp.repository.UserTicketRepository;
 
 @RestController
@@ -64,9 +62,26 @@ public class TicketController {
     return userTicket;
   }
 
+  // QUERY
+  // http://localhost:8080/api/get-ticket?pnr=123
   @GetMapping("/get-ticket")
   public Ticket getTicket(@RequestParam String pnr) {
     Ticket ticket = ticketRepository.findByPnr(pnr);
     return ticket;
+  }
+
+  @GetMapping("/cancel-ticket")
+  public Response cancelTicket(@RequestParam String pnr) {
+    Response response = new Response();
+    Ticket ticket = ticketRepository.findByPnr(pnr);
+    if (ticket != null) {
+      ticketRepository.delete(ticket);
+      response.message = "Ticket Cancelled Successfully";
+      response.status = 200;
+    } else {
+      response.message = "Ticket Not Found";
+      response.status = 404;
+    }
+    return response;
   }
 }
