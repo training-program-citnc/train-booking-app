@@ -34,6 +34,38 @@
         </div>
       </div>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("form");
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const trainId = document.getElementById("trainName").value;
+
+          if (trainId) {
+            const query = new URLSearchParams({ trainId: trainId });
+            fetch(`/api/delete-train?${query.toString()}`, {
+              method: "GET",
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === 200) {
+                  alert("Train deleted successfully");
+                  window.location.href = "admin-dashboard";
+                } else {
+                  alert("Train not found");
+                }
+              })
+              .catch((error) => {
+                console.error("Error deleting train:", error);
+                alert("Error deleting train");
+              });
+          } else {
+            alert("Please enter train number");
+          }
+        });
+      });
+    </script>
 
     <!-- Go back - Go to <a href="admin-dashboard-page.html">Admin Dashboard</a> -->
   </body>
