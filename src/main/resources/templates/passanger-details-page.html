@@ -20,7 +20,7 @@
             <br />
             <h1>Passenger Details</h1>
           </center>
-          <form action="payment-page.html">
+          <form action="#">
             <div class="form-group">
               <label for="email">Email ID:</label>
               <input type="text" class="form-control" id="email" />
@@ -29,35 +29,16 @@
               <label for="mobile-number">Mobile Number:</label>
               <input type="text" class="form-control" id="mobile-number" />
             </div>
-
-            <div class="form-group">
-              <input type="button" class="btn" value="+ Add Passanger" />
+            <div id="passenger-details-container">
+              <!-- Passenger details will be dynamically inserted here -->
             </div>
             <div class="form-group">
-              <label for="passenger-name">Passenger Name:</label>
-              <input type="text" class="form-control" id="passenger-name" />
-            </div>
-            <div class="form-group">
-              <label for="age">Age:</label>
-              <input type="text" class="form-control" id="age" />
-            </div>
-            <!-- Can u add equal space between each of button -->
-            <div class="form-group">
-              <label for="gender-group">Gender</label>
-              <div id="gender-group">
-                <label class="radio-inline">
-                  <input type="radio" name="male" checked />
-                  Male
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="female" />
-                  Female
-                </label>
-                <label class="radio-inline">
-                  <input type="radio" name="transgender" />
-                  Transgender
-                </label>
-              </div>
+              <input
+                type="button"
+                class="btn"
+                value="+ Add Passanger"
+                onclick="insertPassengerComponent()"
+              />
             </div>
             <div class="checkbox">
               <label>
@@ -66,7 +47,11 @@
               </label>
             </div>
             <br />
-            <button type="submit" class="btn btn-primary btn-block">
+            <button
+              type="button"
+              class="btn btn-primary btn-block"
+              onclick="getPassengerDetails()"
+            >
               Proceed Payment
             </button>
           </form>
@@ -74,6 +59,88 @@
         </div>
       </div>
     </div>
+
+    <script>
+      let passengerCount = 1;
+
+      function insertPassengerComponent() {
+        const passengerComponent = document.createElement("div");
+        passengerComponent.innerHTML = `
+            <div id="#passenger-details">
+              <hr />
+              <h4>Passenger Details (${passengerCount})</h4>
+              <div class="form-group">
+                <label for="passenger-name">Passenger Name:</label>
+                <input type="text" class="form-control" id="passenger-name" />
+              </div>
+              <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="text" class="form-control" id="age" />
+              </div>
+              <!-- Can u add equal space between each of button -->
+              <div class="form-group">
+                <label for="gender-group">Gender</label>
+                <div id="gender-group">
+                  <label class="radio-inline">
+                    <input type="radio" name="male" checked />
+                    Male
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="female" />
+                    Female
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="transgender" />
+                    Transgender
+                  </label>
+                </div>
+              </div>
+            </div>`;
+        const passengerDetailsContainer = document.querySelector(
+          "#passenger-details-container"
+        );
+        passengerDetailsContainer.appendChild(passengerComponent);
+        passengerCount++;
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookedSeatsByClass = JSON.parse(
+          urlParams.get("bookedSeatsByClass")
+        );
+        const selectedClass = urlParams.get("selectedClass");
+        bookedSeatsByClass[selectedClass].forEach((seat) => {
+          insertPassengerComponent();
+        });
+      });
+
+      function getPassengerDetails() {
+        // e.preventDefault();
+        const passengerDetails = [];
+        const passengerDetailsContainer = document.querySelector(
+          "#passenger-details-container"
+        );
+        console.log(passengerDetailsContainer);
+        const passengerComponents =
+          passengerDetailsContainer.getElementsById("#passenger-details");
+        console.log(passengerComponents);
+        passengerComponents.forEach((passengerComponent) => {
+          console.log(passengerComponent);
+          const passengerName =
+            passengerComponent.querySelector("#passenger-name").value;
+          const age = passengerComponent.querySelector("#age").value;
+          const gender =
+            passengerComponent.querySelector("#gender-group").value;
+          passengerDetails.push({
+            passengerName,
+            age,
+            gender,
+          });
+        });
+        // console.log(passengerDetails);
+        return passengerDetails;
+      }
+    </script>
 
     <!-- Payment - Go to <a href="payment-page.html">Payment Page</a><br /> -->
   </body>

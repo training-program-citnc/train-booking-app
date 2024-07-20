@@ -299,6 +299,7 @@
           type="submit"
           class="btn"
           style="background-color: black; color: white"
+          id="book-ticket-btn"
         >
           Click Here to Passenger Enter Details
         </button>
@@ -309,7 +310,7 @@
     <script>
       function createTicket(selectedClass, bookedSeatsByClass) {
         $.get(
-          `/api/create-train?trainName=dusky_train&trainNumber=212&source=patna&destination=bangalore&date=17-07-2024&time=23:41`
+          `http://localhost:8080/api/create-ticket?pnr=123&trainId=123&paymentMethod=netbanking&amount=2500&passengerEmail=r.rahul.developer@gmail.com&passengerMobileNumber=8002030975`
         );
       }
 
@@ -372,6 +373,15 @@
           console.log("Selected Class:", selectedClass);
 
           updateSeatDisplay();
+        });
+
+        $("#book-ticket-btn").click(function (e) {
+          e.preventDefault();
+          const queryParams = new URLSearchParams({
+            bookedSeatsByClass: JSON.stringify(bookedSeatsByClass),
+            selectedClass: selectedClass,
+          });
+          window.location.href = `/passanger-details?${queryParams}`;
         });
       });
     </script>
