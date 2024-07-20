@@ -20,7 +20,7 @@
             <br />
             <h1>Edit Train</h1>
           </center>
-          <form action="admin-dashboard-page.html">
+          <form id="edit-train-form">
             <div class="form-group">
               <label for="trainName">Train Name:</label>
               <input type="text" class="form-control" id="trainName" />
@@ -41,7 +41,11 @@
                   Select Station
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="fromDropdown">
+                <ul
+                  class="dropdown-menu"
+                  id="from-station-list"
+                  aria-labelledby="fromDropdown"
+                >
                   <li><a href="#">Chennai</a></li>
                   <li><a href="#">Bangalore</a></li>
                   <li><a href="#">Delhi</a></li>
@@ -62,7 +66,11 @@
                   Select Station
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="toDropdown">
+                <ul
+                  class="dropdown-menu"
+                  id="to-station-list"
+                  aria-labelledby="toDropdown"
+                >
                   <li><a href="#">Chennai</a></li>
                   <li><a href="#">Bangalore</a></li>
                   <li><a href="#">Delhi</a></li>
@@ -73,11 +81,11 @@
             </div>
             <div class="form-group">
               <label for="date">Date(DD/MM/YY):</label>
-              <input type="date" class="form-control" id="usr" />
+              <input type="date" class="form-control" id="date" />
             </div>
             <div class="form-group">
               <label for="time">Time (HH:MM)</label>
-              <input type="time" class="form-control" id="time" name="time" />
+              <input type="time" class="form-control" id="time" />
             </div>
             <br />
             <button type="submit" class="btn btn-primary btn-block">
@@ -88,7 +96,106 @@
         </div>
       </div>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const trainIdInput = document.getElementById("trainId");
+        const form = document.getElementById("edit-train-form");
 
-    <!-- Go back - Go to <a href="admin-dashboard-page.html">Admin Dashboard</a> -->
+        document
+          .getElementById("from-station-list")
+          .addEventListener("click", function (e) {
+            if (e.target.tagName === "A") {
+              document.getElementById("fromDropdown").innerText =
+                e.target.innerText;
+            }
+          });
+
+        document
+          .getElementById("to-station-list")
+          .addEventListener("click", function (e) {
+            if (e.target.tagName === "A") {
+              document.getElementById("toDropdown").innerText =
+                e.target.innerText;
+            }
+          });
+
+        function fetchTrainDetails(trainId) {
+          fetch(`/api/search-train-by-id?trainId=${trainId}`)
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              if (data) {
+                const train = data;
+                document.getElementById("trainName").value = train.trainName;
+                document.getElementById("trainId").value = train.trainNumber;
+                document.getElementById("fromDropdown").innerText =
+                  train.source;
+                document.getElementById("toDropdown").innerText =
+                  train.destination;
+                document.getElementById("date").value = train.date
+                  .split("-")
+                  .reverse()
+                  .join("-");
+                document.getElementById("time").value = train.time
+                  ? train.time
+                  : "00:00";
+              } else {
+                alert("Train not found");
+              }
+            })
+            .catch((error) =>
+              console.error("Error fetching train details:", error)
+            );
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const trainId = trainIdInput.value;
+          const trainName = document.getElementById("trainName").value;
+          const from = document.getElementById("fromDropdown").innerText;
+          const to = document.getElementById("toDropdown").innerText;
+          const date = document
+            .getElementById("date")
+            .value.split("-")
+            .reverse()
+            .join("-");
+          const time = document.getElementById("time").value;
+
+          const queryParams = new URLSearchParams({
+            trainNumber: trainId,
+            trainName: trainName,
+            source: from,
+            destination: to,
+            date: date,
+            time: time,
+          });
+
+          fetch(`/api/edit-train?${queryParams.toString()}`, {
+            method: "GET",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              if (data.status == 200) {
+                alert("Train details updated successfully");
+                window.location.href = "admin-dashboard";
+              } else {
+                alert("Error updating train details");
+              }
+            })
+            .catch((error) =>
+              console.error("Error updating train details:", error)
+            );
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const trainId = urlParams.get("trainId");
+        if (trainId) {
+          trainIdInput.value = trainId;
+          fetchTrainDetails(trainId);
+        }
+      });
+    </script>
   </body>
 </html>

@@ -29,7 +29,7 @@ public class TrainController {
   }
 
   @GetMapping("/edit-train")
-  public Response editTrain(@RequestParam Train train) {
+  public Response editTrain(@ModelAttribute Train train) {
     trainRepository.save(train);
     Response response = new Response();
     response.message = "Train Edited Successfully";
