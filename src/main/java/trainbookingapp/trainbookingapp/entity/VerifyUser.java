@@ -7,16 +7,16 @@ import jakarta.persistence.Id;
 public class VerifyUser {
 
   @Id
-  private String email_id;
+  private String email;
 
   private String otp;
 
   public String getEmail() {
-    return email_id;
+    return email;
   }
 
   public void setEmail(String email) {
-    this.email_id = email;
+    this.email = email;
   }
 
   public String getOtp() {
