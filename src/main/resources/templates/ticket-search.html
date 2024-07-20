@@ -15,14 +15,15 @@
     <br />
     <div class="container">
       <h1>Search</h1>
-      <form action="user-login-page.html">
+      <form id="train-form">
         <div class="row">
           <div class="col-sm-6">
-            <label for="pwd">From:</label>
+            <label for="from">From:</label>
             <div class="dropdown">
               <button
                 class="btn btn-default dropdown-toggle"
                 type="button"
+                id="fromDropdown"
                 data-toggle="dropdown"
                 style="
                   width: 100%;
@@ -33,7 +34,11 @@
               >
                 City <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" style="width: 100%">
+              <ul
+                class="dropdown-menu"
+                id="station-list-from"
+                style="width: 100%"
+              >
                 <li><a href="#">Chennai</a></li>
                 <li><a href="#">Bangalore</a></li>
                 <li><a href="#">Delhi</a></li>
@@ -42,11 +47,12 @@
             </div>
           </div>
           <div class="col-sm-6">
-            <label for="pwd">To:</label>
+            <label for="to">To:</label>
             <div class="dropdown">
               <button
                 class="btn btn-default dropdown-toggle"
                 type="button"
+                id="toDropdown"
                 data-toggle="dropdown"
                 style="
                   width: 100%;
@@ -57,7 +63,11 @@
               >
                 City <span class="caret"></span>
               </button>
-              <ul class="dropdown-menu" style="width: 100%">
+              <ul
+                class="dropdown-menu"
+                id="station-list-to"
+                style="width: 100%"
+              >
                 <li><a href="#">Chennai</a></li>
                 <li><a href="#">Bangalore</a></li>
                 <li><a href="#">Delhi</a></li>
@@ -69,22 +79,131 @@
         <br />
         <div class="row">
           <div class="col-sm-3">
-            <input type="date" class="form-control" id="usr" />
+            <input type="date" class="form-control" id="date" />
           </div>
           <div class="col-sm-9">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="checkTrainAvailability()"
+            >
+              Search
+            </button>
           </div>
         </div>
         <br />
-        <div class="row">
+        <div class="row" id="error-message" style="display: none">
           <div class="col-sm-12">
             <div class="alert alert-danger">Train not found!</div>
           </div>
         </div>
       </form>
     </div>
+    <div id="train-details-container" class="container"></div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("station-list-from")
+          .addEventListener("click", function (e) {
+            if (e.target.tagName === "A") {
+              document.getElementById("fromDropdown").innerText =
+                e.target.innerText;
+            }
+          });
 
-    <!-- Found - Go to <a href="user-login-page.html">Login Page</a><br />
-    Not Found - Go to <a href="main-page.html">Main Page</a> -->
+        document
+          .getElementById("station-list-to")
+          .addEventListener("click", function (e) {
+            if (e.target.tagName === "A") {
+              document.getElementById("toDropdown").innerText =
+                e.target.innerText;
+            }
+          });
+      });
+
+      function createTrainDetailElement(train_name, from, to, date, time) {
+        const trainDetails = document.createElement("div");
+        trainDetails.className = "col-md-12";
+        trainDetails.style.border = "1px solid #ddd";
+        trainDetails.style.borderRadius = "5px";
+        trainDetails.style.padding = "15px";
+        trainDetails.style.marginBottom = "20px";
+
+        trainDetails.innerHTML = `
+          <h2>${train_name} <small class="text-muted">#1234</small></h2>
+          <div class="row">
+            <div class="col-xs-6">
+              <small>From:</small>
+              <p class="lead"><strong>${from}</strong></p>
+            </div>
+            <div class="col-xs-6">
+              <small>To:</small>
+              <p class="lead"><strong>${to}</strong></p>
+           </div>
+            <div class="col-xs-6">
+              <p>Train Date: ${date}</p>
+            </div>
+            <div class="col-xs-6">
+              <p class="lead">
+                Train Time
+                <span class="text-primary" style="font-size: 32px">
+                  <strong>${time}</strong>
+                </span>
+              </p>
+            </div>
+          </div>
+        `;
+
+        return trainDetails;
+      }
+
+      function displayTrainDetails(train_name, from, to, date, time) {
+        const container = document.getElementById("train-details-container");
+        const trainDetailElement = createTrainDetailElement(
+          train_name,
+          from,
+          to,
+          date,
+          time
+        );
+        container.appendChild(trainDetailElement);
+      }
+
+      function checkTrainAvailability() {
+        const from = document.getElementById("fromDropdown").innerText.trim();
+        const to = document.getElementById("toDropdown").innerText.trim();
+        const date = document.getElementById("date").value;
+
+        const api = `/api/search-ticket?source=${from}&destination=${to}&date=${date}`;
+
+        fetch(api)
+          .then((response) => response.json())
+          .then((data) => {
+            const container = document.getElementById(
+              "train-details-container"
+            );
+            container.innerHTML = "";
+            if (data && data.length > 0) {
+              document.getElementById("error-message").style.display = "none";
+              data.forEach((train) => {
+                displayTrainDetails(
+                  train.trainName,
+                  train.source,
+                  train.destination,
+                  train.date,
+                  train.time || "N/A"
+                );
+              });
+            } else {
+              document.getElementById("error-message").style.display = "block";
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching train details:", error);
+            alert("An error occurred while fetching train details.");
+          });
+      }
+    </script>
+     
   </body>
 </html>

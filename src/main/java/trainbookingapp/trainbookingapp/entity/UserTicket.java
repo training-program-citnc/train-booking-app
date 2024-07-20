@@ -14,7 +14,13 @@ public class UserTicket {
 
   String pnr;
 
-  String aadhar;
+  String name;
+  int age;
+  String gender;
+  String preference;
+  String class;
+  String price;
+  String seatNumber;
 
   public String getPnr() {
     return pnr;
