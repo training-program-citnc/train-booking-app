@@ -9,7 +9,7 @@ public class User {
   @Id
   private String aadhar;
 
-  private String username, first_name, last_name, email_id, mobile_number, address, city, state, password, gender;
+  private String username, first_name, last_name, email, mobile_number, address, city, state, password, gender;
 
   private int pincode;
 
@@ -46,11 +46,11 @@ public class User {
   }
 
   public String getEmail() {
-    return email_id;
+    return email;
   }
 
   public void setEmail(String email) {
-    this.email_id = email;
+    this.email = email;
   }
 
   public String getMobileNumber() {

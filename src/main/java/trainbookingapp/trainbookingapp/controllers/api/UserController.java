@@ -58,4 +58,18 @@ public class UserController {
     User user = userRepository.findByAadhar(aadhar);
     return user;
   }
+
+  @GetMapping("/change-password")
+  public Response changePassword(
+    @RequestParam String email,
+    @RequestParam String password
+  ) {
+    User user = userRepository.findByEmail(email);
+    user.setPassword(password);
+    userRepository.save(user);
+    Response response = new Response();
+    response.message = "Password Changed Successfully";
+    response.status = 200;
+    return response;
+  }
 }
