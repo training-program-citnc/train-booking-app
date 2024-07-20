@@ -34,7 +34,7 @@ public class TicketController {
   }
 
   // QUERY
-  // http://localhost:8080/api/add-user?aadhar=999&pnr=123
+  // http://localhost:8080/api/add-user?pnr=12390&name=dusklight&age=19&gender=male&preference=upper&className=UP&price=2000&seatNumber=SUB1
   @GetMapping("/add-user")
   public Response addUser(@ModelAttribute UserTicket userTicket) {
     userTicketRepository.save(userTicket);
@@ -53,12 +53,10 @@ public class TicketController {
   // TODO - Research on what is the difference between Optional and Iterable
 
   // QUERY
-  // http://localhost:8080/api/get-user-ticket?aadhar_card=999
+  // http://localhost:8080/api/get-user-ticket?pnr=123
   @GetMapping("/get-user-ticket")
-  public Iterable<UserTicket> getUserTicket(@RequestParam String aadhar_card) {
-    Iterable<UserTicket> userTicket = userTicketRepository.findAllByAadhar(
-      aadhar_card
-    );
+  public Iterable<UserTicket> getUserTicket(@RequestParam String pnr) {
+    Iterable<UserTicket> userTicket = userTicketRepository.findAllByPnr(pnr);
     return userTicket;
   }
 

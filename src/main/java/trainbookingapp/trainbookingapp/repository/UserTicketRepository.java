@@ -5,5 +5,5 @@ import trainbookingapp.trainbookingapp.entity.UserTicket;
 
 public interface UserTicketRepository
   extends CrudRepository<UserTicket, Integer> {
-  public Iterable<UserTicket> findAllByAadhar(String aadhar);
+  Iterable<UserTicket> findAllByPnr(String pnr);
 }

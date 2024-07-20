@@ -53,7 +53,12 @@ public class TrainController {
     return trainRepository.findAll();
   }
 
-  @GetMapping("/search-ticket")
+  @GetMapping("/search-train-by-id")
+  public Train searchTrainById(@RequestParam String trainId) {
+    return trainRepository.findById(trainId).get();
+  }
+
+  @GetMapping("/search-train")
   public Iterable<Train> searchTicket(
     @RequestParam String source,
     @RequestParam String destination,

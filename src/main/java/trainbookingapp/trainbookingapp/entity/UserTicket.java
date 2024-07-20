@@ -18,8 +18,8 @@ public class UserTicket {
   int age;
   String gender;
   String preference;
-  String class;
-  String price;
+  String className;
+  int price;
   String seatNumber;
 
   public String getPnr() {
@@ -30,11 +30,51 @@ public class UserTicket {
     this.pnr = pnr;
   }
 
-  public String getAadhar() {
-    return aadhar;
+  public String getName() {
+    return name;
   }
 
-  public void setAadhar(String aadhar) {
-    this.aadhar = aadhar;
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
+  }
+
+  public String getGender() {
+    return gender;
+  }
+
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
+
+  public String getClassName() {
+    return className;
+  }
+
+  public void setClassName(String className) {
+    this.className = className;
+  }
+
+  public int getPrice() {
+    return price;
+  }
+
+  public void setPrice(int price) {
+    this.price = price;
+  }
+
+  public String getSeatNumber() {
+    return seatNumber;
+  }
+
+  public void setSeatNumber(String seatNumber) {
+    this.seatNumber = seatNumber;
   }
 }

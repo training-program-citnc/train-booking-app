@@ -151,10 +151,18 @@
                 </span>
               </p>
             </div>
+            <div class ="col-xs-12 text-right">
+            <button type ="button" class="btn btn-sucess" onclick="redirectToLogin()">Book Now</button>
+            
+            </div>
           </div>
         `;
 
         return trainDetails;
+      }
+
+      function redirectToLogin() {
+        window.location.href = "/user-login";
       }
 
       function displayTrainDetails(train_name, from, to, date, time) {
