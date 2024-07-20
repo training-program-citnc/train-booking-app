@@ -1,5 +1,6 @@
 package trainbookingapp.trainbookingapp.controllers.api;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,10 +40,22 @@ public class ForgotPasswordController {
   }
 
   @GetMapping("/verify-otp")
+  @Transactional
   public Response verifyOtp(
     @RequestParam String email,
     @RequestParam String otp
   ) {
-    return new Response();
+    VerifyUser verifyUser = verifyUserRepository.findByEmail(email);
+    if (verifyUser.getOtp().equals(otp)) {
+      verifyUserRepository.deleteByEmail(email);
+      Response response = new Response();
+      response.message = "OTP Verified Successfully";
+      response.status = 200;
+      return response;
+    }
+    Response response = new Response();
+    response.message = "OTP Verification Failed";
+    response.status = 400;
+    return response;
   }
 }
