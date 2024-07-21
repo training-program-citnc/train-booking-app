@@ -54,6 +54,14 @@ public class UserTicket {
     this.gender = gender;
   }
 
+  public String getPreference() {
+    return preference;
+  }
+
+  public void setPreference(String preference) {
+    this.preference = preference;
+  }
+
   public String getClassName() {
     return className;
   }

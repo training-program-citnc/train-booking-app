@@ -50,7 +50,7 @@
             <button
               type="button"
               class="btn btn-primary btn-block"
-              onclick="getPassengerDetails()"
+              onclick="handleSubmit()"
             >
               Proceed Payment
             </button>
@@ -88,11 +88,11 @@
                     Male
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="female" />
+                    <input type="radio" name="female" id="female" />
                     Female
                   </label>
                   <label class="radio-inline">
-                    <input type="radio" name="transgender" />
+                    <input type="radio" name="transgender" id="transgender" />
                     Transgender
                   </label>
                 </div>
@@ -123,7 +123,14 @@
           const passengerName =
             passenger.querySelector("#passenger-name").value;
           const age = passenger.querySelector("#age").value;
-          const gender = passenger.querySelector("#gender-group").value;
+          const maleChecked = passenger.querySelector("#male").checked;
+          const femaleChecked = passenger.querySelector("#female").checked;
+          const transgenderChecked =
+            passenger.querySelector("#transgender").checked;
+          let gender = null;
+          if (maleChecked) gender = "male";
+          else if (femaleChecked) gender = "female";
+          else if (transgenderChecked) gender = "transgender";
           passengerDetails.push({
             passengerName,
             age,
@@ -132,6 +139,23 @@
         });
         console.log(passengerDetails);
         return passengerDetails;
+      }
+
+      function handleSubmit() {
+        const email = document.getElementById("email").value;
+        const mobileNumber = document.getElementById("mobile-number").value;
+        const passengerDetails = getPassengerDetails();
+        const searchParams = new URLSearchParams(window.location.search);
+        const bookedSeatsByClass = searchParams.get("bookedSeatsByClass");
+        const selectedClass = searchParams.get("selectedClass");
+        const queryString = $.param({
+          email: email,
+          mobileNumber: mobileNumber,
+          passengerDetails: JSON.stringify(passengerDetails),
+          bookedSeatsByClass: JSON.stringify(bookedSeatsByClass),
+          selectedClass: JSON.stringify(selectedClass),
+        });
+        window.location.href = `payment?${queryString}`;
       }
     </script>
 
