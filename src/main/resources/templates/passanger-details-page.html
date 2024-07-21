@@ -63,6 +63,8 @@
     <script>
       let passengerCount = 1;
 
+      const passangers = [];
+
       function insertPassengerComponent() {
         const passengerComponent = document.createElement("div");
         passengerComponent.innerHTML = `
@@ -82,7 +84,7 @@
                 <label for="gender-group">Gender</label>
                 <div id="gender-group">
                   <label class="radio-inline">
-                    <input type="radio" name="male" checked />
+                    <input type="radio" name="male" id="male" checked />
                     Male
                   </label>
                   <label class="radio-inline">
@@ -100,6 +102,7 @@
           "#passenger-details-container"
         );
         passengerDetailsContainer.appendChild(passengerComponent);
+        passangers.push(passengerComponent);
         passengerCount++;
       }
 
@@ -115,29 +118,19 @@
       });
 
       function getPassengerDetails() {
-        // e.preventDefault();
         const passengerDetails = [];
-        const passengerDetailsContainer = document.querySelector(
-          "#passenger-details-container"
-        );
-        console.log(passengerDetailsContainer);
-        const passengerComponents =
-          passengerDetailsContainer.getElementsById("#passenger-details");
-        console.log(passengerComponents);
-        passengerComponents.forEach((passengerComponent) => {
-          console.log(passengerComponent);
+        passangers.forEach((passenger) => {
           const passengerName =
-            passengerComponent.querySelector("#passenger-name").value;
-          const age = passengerComponent.querySelector("#age").value;
-          const gender =
-            passengerComponent.querySelector("#gender-group").value;
+            passenger.querySelector("#passenger-name").value;
+          const age = passenger.querySelector("#age").value;
+          const gender = passenger.querySelector("#gender-group").value;
           passengerDetails.push({
             passengerName,
             age,
             gender,
           });
         });
-        // console.log(passengerDetails);
+        console.log(passengerDetails);
         return passengerDetails;
       }
     </script>

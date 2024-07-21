@@ -39,6 +39,7 @@ public class ForgotPasswordController {
     return response;
   }
 
+  // /api/verify-otp?email=r.rahul.developer@gmail.com&otp=123456
   @GetMapping("/verify-otp")
   @Transactional
   public Response verifyOtp(
