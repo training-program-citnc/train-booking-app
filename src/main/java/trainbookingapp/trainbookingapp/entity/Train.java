@@ -61,7 +61,7 @@ public class Train {
     return time;
   }
 
-  public void setDepartureTime(String time) {
+  public void setTime(String time) {
     this.time = time;
   }
 }
