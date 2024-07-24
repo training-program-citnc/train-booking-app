@@ -64,6 +64,7 @@ public class TrainController {
     @RequestParam String destination,
     @RequestParam String date
   ) {
+    // return trainRepository.findAll();
     return trainRepository.findAllBySourceAndDestinationAndDate(
       source,
       destination,

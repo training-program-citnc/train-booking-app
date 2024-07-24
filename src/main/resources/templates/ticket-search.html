@@ -182,7 +182,7 @@
         const to = document.getElementById("toDropdown").innerText.trim();
         const date = document.getElementById("date").value;
 
-        const api = `/api/search-ticket?source=${from}&destination=${to}&date=${date}`;
+        const api = `/api/search-train?source=${from}&destination=${to}&date=${date}`;
 
         fetch(api)
           .then((response) => response.json())

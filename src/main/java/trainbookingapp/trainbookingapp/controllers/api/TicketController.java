@@ -82,4 +82,10 @@ public class TicketController {
     }
     return response;
   }
+
+  @GetMapping("/get-all-user-ticket")
+  public Iterable<Ticket> getAllUserTicket(@RequestParam String email) {
+    Iterable<Ticket> tickets = ticketRepository.findAllByEmail(email);
+    return tickets;
+  }
 }

@@ -126,7 +126,8 @@
 
     async function createTicket() {
       const pnr = generatePNR();
-      const createTicketResponse = await fetch(`/api/create-ticket?pnr=${pnr}&trainId=123&paymentMethod=${mode}&amount=${price}&passengerEmail=${email}&passengerMobileNumber=${mobileNumber}`);
+      console.log(email)
+      const createTicketResponse = await fetch(`/api/create-ticket?pnr=${pnr}&trainId=123&method=${mode}&amount=${price}&email=${email}&passengerMobileNumber=${mobileNumber}`);
       // passengerDetails.forEach(async passenger => {
       //   const name = passenger.passengerName;
       //   const age = passenger.age;

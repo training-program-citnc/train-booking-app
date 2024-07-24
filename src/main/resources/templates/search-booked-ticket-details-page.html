@@ -12,8 +12,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <div id="station-list"></div>
-    <script src="script.js" />
     <div class="container">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -22,10 +20,10 @@
             <br />
             <h3>Provide train details to view the tickets booked</h3>
           </center>
-          <form action="view-booked-ticket-page.html">
+          <form id="ticketSearchForm">
             <div class="form-group">
               <label for="trainId">Train ID:</label>
-              <input type="text" class="form-control" id="trainId" />
+              <input type="text" class="form-control" id="trainId" required />
             </div>
             <div class="form-group">
               <label for="from">From:</label>
@@ -40,15 +38,15 @@
                   <span class="caret"></span>
                 </button>
                 <ul
-                  id="station-list"
+                  id="fromStationList"
                   class="dropdown-menu"
                   aria-labelledby="fromDropdown"
                 >
-                  <li><a href="#">Chennai</a></li>
-                  <li><a href="#">Bangalore</a></li>
-                  <li><a href="#">Delhi</a></li>
-                  <li><a href="#">Mumbai</a></li>
-                  <li><a href="#">Kerala</a></li>
+                  <li><a href="#" class="dropdown-item">Chennai</a></li>
+                  <li><a href="#" class="dropdown-item">Bangalore</a></li>
+                  <li><a href="#" class="dropdown-item">Delhi</a></li>
+                  <li><a href="#" class="dropdown-item">Mumbai</a></li>
+                  <li><a href="#" class="dropdown-item">Kerala</a></li>
                 </ul>
               </div>
             </div>
@@ -64,22 +62,32 @@
                   Select Station
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="toDropdown">
-                  <li><a href="#">Chennai</a></li>
-                  <li><a href="#">Bangalore</a></li>
-                  <li><a href="#">Delhi</a></li>
-                  <li><a href="#">Mumbai</a></li>
-                  <li><a href="#">Kerala</a></li>
+                <ul
+                  id="toStationList"
+                  class="dropdown-menu"
+                  aria-labelledby="toDropdown"
+                >
+                  <li><a href="#" class="dropdown-item">Chennai</a></li>
+                  <li><a href="#" class="dropdown-item">Bangalore</a></li>
+                  <li><a href="#" class="dropdown-item">Delhi</a></li>
+                  <li><a href="#" class="dropdown-item">Mumbai</a></li>
+                  <li><a href="#" class="dropdown-item">Kerala</a></li>
                 </ul>
               </div>
             </div>
             <div class="form-group">
-              <label for="date">Date(DD/MM/YY):</label>
-              <input type="date" class="form-control" id="usr" />
+              <label for="date">Date (DD/MM/YY):</label>
+              <input type="date" class="form-control" id="date" required />
             </div>
             <div class="form-group">
               <label for="time">Time (HH:MM)</label>
-              <input type="time" class="form-control" id="time" name="time" />
+              <input
+                type="time"
+                class="form-control"
+                id="time"
+                name="time"
+                required
+              />
             </div>
             <br />
             <button type="submit" class="btn btn-primary btn-block">
@@ -87,8 +95,61 @@
             </button>
           </form>
           <br />
+          <div id="ticketDetails"></div>
         </div>
       </div>
     </div>
+    <script>
+      $("#ticketSearchForm").on("submit", function (event) {
+        event.preventDefault();
+
+        const trainId = $("#trainId").val();
+        const from = $("#fromDropdown").text().trim();
+        const to = $("#toDropdown").text().trim();
+        const date = $("#date").val();
+        const time = $("#time").val();
+
+        window.location.href = "/view-booked-ticket?trainId=" + trainId;
+      });
+
+      // function displayTickets(tickets) {
+      //   const ticketDetailsContainer = $("#ticketDetails");
+      //   ticketDetailsContainer.empty();
+
+      //   if (tickets.length === 0) {
+      //     ticketDetailsContainer.append(
+      //       "<p>No tickets found for the given details.</p>"
+      //     );
+      //     return;
+      //   }
+      //   tickets.forEach((ticket) => {
+      //     const ticketElement = `
+      //       <div class="panel panel-default">
+      //         <div class="panel-heading">
+      //           <h3 class="panel-title">PNR: ${ticket.pnr}</h3>
+      //         </div>
+      //         <div class="panel-body">
+      //           <p><strong>Passenger Name:</strong> ${ticket.passenger_name}</p>
+      //           <p><strong>Train:</strong> ${ticket.train_name}</p>
+      //           <p><strong>From:</strong> ${ticket.from}</p>
+      //           <p><strong>To:</strong> ${ticket.to}</p>
+      //           <p><strong>Date:</strong> ${ticket.date}</p>
+      //           <p><strong>Time:</strong> ${ticket.time}</p>
+      //           <p><strong>Seat:</strong> ${ticket.seat_number}</p>
+      //         </div>
+      //       </div>
+      //     `;
+      //     ticketDetailsContainer.append(ticketElement);
+      //   });
+      // }
+
+      // $("#fromStationList").on("click", "a", function () {
+      //   $("#fromDropdown").text($(this).text());
+      // });
+
+      // $("#toStationList").on("click", "a", function () {
+      //   $("#toDropdown").text($(this).text());
+      // });
+    </script>
   </body>
 </html>

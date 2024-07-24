@@ -8,6 +8,12 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
     <!-- SAHIL CODE WILL BE PASTED HERE -->
@@ -38,40 +44,8 @@
               <button class="btn btn-primary">Tickets Booked</button>
             </div>
             <div class="row justify-content-center">
-              <div class="col-sm-12 col-md-5">
-                <div class="border border-dark p-2 mb-3">PNR1234567890</div>
-                <div class="border border-dark p-2 mb-3">PNR9876543210</div>
-                <div class="border border-dark p-2 mb-3">PNR5678901234</div>
-                <div class="border border-dark p-2 mb-3">PNR2468135790</div>
-                <div class="border border-dark p-2 mb-3">PNR1357924680</div>
-              </div>
-              <div class="col-sm-12 col-md-5">
-                <a href="view-booked-detail-page.html"
-                  ><button class="btn btn-info mb-3 w-100">
-                    Show Details
-                  </button></a
-                >
-                <a href="view-booked-detail-page.html"
-                  ><button class="btn btn-info mb-3 w-100">
-                    Show Details
-                  </button></a
-                >
-                <a href="view-booked-detail-page.html"
-                  ><button class="btn btn-info mb-3 w-100">
-                    Show Details
-                  </button></a
-                >
-                <a href="view-booked-detail-page.html"
-                  ><button class="btn btn-info mb-3 w-100">
-                    Show Details
-                  </button></a
-                >
-                <a href="view-booked-detail-page.html"
-                  ><button class="btn btn-info mb-3 w-100">
-                    Show Details
-                  </button></a
-                >
-              </div>
+              <div class="col-sm-12 col-md-5" id="show-pnr-section"></div>
+              <div class="col-sm-12 col-md-5" id="show-ticket-section"></div>
             </div>
           </div>
         </div>
@@ -162,5 +136,50 @@
         </div>
       </div>
     </div>
+    <script>
+      const showTicketSection = document.getElementById("show-ticket-section");
+      const showPnrSection = document.getElementById("show-pnr-section");
+
+      function createTicketElement(pnr) {
+        const ticketElement = document.createElement("div");
+        ticketElement.className = "border border-dark p-2 mb-3";
+        ticketElement.innerText = pnr;
+        return ticketElement;
+      }
+
+      function createShowDetailsButton(link) {
+        const showDetailsButton = document.createElement("button");
+        showDetailsButton.className = "btn btn-info mb-3 w-100";
+        showDetailsButton.innerText = "Show Details";
+        showDetailsButton.onclick = function () {
+          window.location.href = link;
+        };
+        return showDetailsButton;
+      }
+
+      function appendTicket(pnr) {
+        const ticketElement = createTicketElement(pnr);
+        const showDetailsElement = createShowDetailsButton(
+          "/view-booked-detail?pnr=" + pnr
+        );
+        showTicketSection.appendChild(showDetailsElement);
+        showPnrSection.appendChild(ticketElement);
+      }
+
+      $(document).ready(function () {
+        $.ajax({
+          url: "/api/all-ticket",
+          method: "GET",
+          success: function (data) {
+            data.forEach((item) => {
+              appendTicket(item.pnr);
+            });
+          },
+          error: function (err) {
+            console.error("Error fetching tickets:", err);
+          },
+        });
+      });
+    </script>
   </body>
 </html>

@@ -10,9 +10,9 @@ public class Ticket {
   String pnr;
 
   String train_id;
-  String payment_method;
+  String method;
   int amount;
-  String passenger_email;
+  String email;
   String passenger_mobile_number;
 
   public String getPnr() {
@@ -31,12 +31,12 @@ public class Ticket {
     this.train_id = train_id;
   }
 
-  public String getPaymentMethod() {
-    return payment_method;
+  public String getMethod() {
+    return method;
   }
 
-  public void setPaymentMethod(String payment_method) {
-    this.payment_method = payment_method;
+  public void setMethod(String method) {
+    this.method = method;
   }
 
   public int getAmount() {
@@ -47,12 +47,12 @@ public class Ticket {
     this.amount = amount;
   }
 
-  public String getPassengerEmail() {
-    return passenger_email;
+  public String getEmail() {
+    return email;
   }
 
-  public void setPassengerEmail(String passenger_email) {
-    this.passenger_email = passenger_email;
+  public void setEmail(String email) {
+    this.email = email;
   }
 
   public String getPassengerMobileNumber() {

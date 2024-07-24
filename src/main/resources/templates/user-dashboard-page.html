@@ -154,7 +154,6 @@
         all_passengers
       ) {
         const container = document.getElementById("booked-tickets-container");
-        console.log(all_passengers);
         const ticketElement = createBookedTicketElement(
           pnr,
           passenger_name,
@@ -196,7 +195,6 @@
         const response = await fetch(endpoint).then((response) =>
           response.json()
         );
-        console.log(response);
         for (const train of response) {
           if (train.trainNumber == trainId) return train;
         }
@@ -236,7 +234,6 @@
           users.forEach((user) => seats.push(user.seatNumber));
           const usernames = [];
           users.forEach((user) => usernames.push(user.name));
-          console.log(usernames);
           displayBookedTicket(
             pnr,
             adminUser,
