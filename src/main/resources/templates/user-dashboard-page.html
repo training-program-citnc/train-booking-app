@@ -15,26 +15,28 @@
     <div class="container">
       <div class="pull-right">
         <br />
-        <a href="main-page.html">
+        <a href="/">
           <button type="button" class="btn btn-primary">Logout</button>
         </a>
       </div>
 
       <br />
       <h1 class="mt-4">
-        Good Morning, Rahul<span style="color: lightgray">
-          (User Dashboard)</span
-        >
+        Good Morning, <span id="user-name"></span
+        ><span style="color: lightgray"> (User Dashboard)</span>
       </h1>
       <div class="mt-4">
         <br />
         <br />
-        <a href="book-ticket-page.html">
+        <a href="book-ticket">
           <button type="button" class="btn btn-primary">Book Tickets</button>
         </a>
 
-        <a href="cancel-ticket-page.html">
+        <a href="cancel-ticket">
           <button type="button" class="btn btn-primary">Cancel Ticket</button>
+        </a>
+        <a href="ticket-search">
+          <button type="button" class="btn btn-primary">Search Train</button>
         </a>
       </div>
     </div>
@@ -152,6 +154,7 @@
         all_passengers
       ) {
         const container = document.getElementById("booked-tickets-container");
+        console.log(all_passengers);
         const ticketElement = createBookedTicketElement(
           pnr,
           passenger_name,
@@ -170,20 +173,97 @@
         return Math.floor(1000000000 + Math.random() * 9000000000).toString();
       }
 
-      function updateBookedTicketsDisplay() {
+      const EMAIL = "r.rahul.developer@gmail.com";
+
+      async function fetchUserData(aadhar) {
+        const endpoint = `/api/get-user-by-aadhar?aadhar=${aadhar}`;
+        const response = await fetch(endpoint).then((response) =>
+          response.json()
+        );
+        return response;
+      }
+
+      async function fetchTicketData(email) {
+        const endpoint = `/api/get-all-user-ticket?email=${email}`;
+        const response = await fetch(endpoint).then((response) =>
+          response.json()
+        );
+        return response;
+      }
+
+      async function fetchTrainData(trainId) {
+        const endpoint = `/api/all-trains`;
+        const response = await fetch(endpoint).then((response) =>
+          response.json()
+        );
+        console.log(response);
+        for (const train of response) {
+          if (train.trainNumber == trainId) return train;
+        }
+        return -1;
+      }
+
+      async function fetchUserTicketData(pnr) {
+        const endpoint = `api/get-user-ticket?pnr=${pnr}`;
+        const response = await fetch(endpoint).then((response) =>
+          response.json()
+        );
+        return response;
+      }
+
+      async function updateBookedTicketsDisplay() {
+        const usernameComponent = document.getElementById("user-name");
+        const searchParams = new URLSearchParams(window.location.search);
+        const aadhar = searchParams.get("aadhar");
+
+        const user = await fetchUserData(aadhar);
+        usernameComponent.innerText = user.username;
+
+        const tickets = await fetchTicketData(user.email);
+        tickets.forEach(async (ticket) => {
+          const pnr = ticket.pnr;
+          const trainId = ticket.trainId;
+          const train = await fetchTrainData(trainId);
+          const users = await fetchUserTicketData(pnr);
+
+          const adminUser = users[0]?.name;
+          const trainName = train.trainName;
+          const from = train.source;
+          const to = train.destination;
+          const date = train.date;
+          const time = train.time;
+          const seats = [];
+          users.forEach((user) => seats.push(user.seatNumber));
+          const usernames = [];
+          users.forEach((user) => usernames.push(user.name));
+          console.log(usernames);
+          displayBookedTicket(
+            pnr,
+            adminUser,
+            trainName,
+            from,
+            to,
+            date,
+            time,
+            seats,
+            usernames
+          );
+        });
+
         const container = document.getElementById("booked-tickets-container");
         container.innerHTML = ""; // Clear previous content
-        displayBookedTicket(
-          generatePNR(),
-          "Rahul",
-          "Rajdhani Express",
-          "Delhi",
-          "Mumbai",
-          "2024-07-21",
-          "16:45",
-          "B12",
-          ["Rahul", "Sahil", "Sam"]
-        );
+        // displayBookedTicket(
+        //   generatePNR(),
+        //   "Rahul",
+        //   "Rajdhani Express",
+        //   "Delhi",
+        //   "Mumbai",
+        //   "2024-07-21",
+        //   "16:45",
+        //   "B12",
+        //   ["Rahul", "Sahil", "Sam"]
+        // );
+        fetchTickets();
       }
 
       document.addEventListener("DOMContentLoaded", updateBookedTicketsDisplay);
