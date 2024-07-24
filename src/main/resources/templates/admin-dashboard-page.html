@@ -17,32 +17,32 @@
         <div class="col-xs-12">
           <div class="pull-right">
             <br />
-            <a href="main-page.html">
+            <a href="/">
               <button type="button" class="btn btn-primary">Logout</button>
             </a>
           </div>
           <h1 class="mt-4">
-            Good Morning, Sahil
+            Good Morning, Admin<span id="user-name"></span>
             <small class="text-muted">(Admin Dashboard)</small>
           </h1>
           <div class="mt-4">
             <br />
-            <a href="create-train-page.html">
+            <a href="create-train">
               <button type="button" class="btn btn-primary">
                 + Create Train
               </button>
             </a>
-            <a href="view-booked-ticket-page.html">
+            <a href="view-booked-ticket">
               <button type="button" class="btn btn-primary">
                 View Booked Ticket
               </button>
             </a>
-            <a href="delete-train-page.html">
+            <a href="delete-train">
               <button type="button" class="btn btn-primary">
                 Delete Train
               </button>
             </a>
-            <a href="edit-train-page.html">
+            <a href="edit-train">
               <button type="button" class="btn btn-primary">Edit Train</button>
             </a>
           </div>
@@ -109,18 +109,45 @@
         container.appendChild(trainDetailElement);
       }
 
-      function updateTrainDisplay() {
+      async function fetchUserData(aadhar) {
+        const endpoint = `/api/get-user-by-aadhar?aadhar=${aadhar}`;
+        const response = await fetch(endpoint).then((response) =>
+          response.json()
+        );
+        return response;
+      }
+
+      async function fetchTicketData(email) {
+        const endpoint = `/api/get-all-user-ticket?email=${email}`;
+        const response = await fetch(endpoint).then((response) =>
+          response.json()
+        );
+        return response;
+      }
+
+      async function fetchTrainData() {
+        const endpoint = `/api/all-trains`;
+        const response = await fetch(endpoint).then((response) =>
+          response.json()
+        );
+        return response;
+      }
+
+      async function updateTrainDisplay() {
         const container = document.getElementById("train-details-container");
         container.innerHTML = ""; // Clear previous content
 
-        //displayTrainDetails('Satabadi', 'Chennai', 'Bangalore', '2024-07-20', '14:30');
-        displayTrainDetails(
-          "Rajdhani Express",
-          "Delhi",
-          "Mumbai",
-          "2024-07-21",
-          "16:45"
-        );
+        const trains = await fetchTrainData();
+        console.log(trains);
+        trains.forEach((train) => {
+          displayTrainDetails(
+            train.trainName,
+            train.source,
+            train.destination,
+            train.date,
+            train.time
+          );
+        });
       }
 
       document.addEventListener("DOMContentLoaded", updateTrainDisplay);
