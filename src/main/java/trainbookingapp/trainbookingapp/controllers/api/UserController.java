@@ -31,7 +31,7 @@ public class UserController {
         user.getPassword().equals(password)
       ) {
         Response response = new Response();
-        response.message = "Login Successful";
+        response.message = user.getAadhar();
         response.status = 200;
         return response;
       }
@@ -71,5 +71,11 @@ public class UserController {
     response.message = "Password Changed Successfully";
     response.status = 200;
     return response;
+  }
+
+  @GetMapping("/get-user-by-aadhar")
+  public User getUserByAadhar(@RequestParam String aadhar) {
+    User user = userRepository.findByAadhar(aadhar);
+    return user;
   }
 }
