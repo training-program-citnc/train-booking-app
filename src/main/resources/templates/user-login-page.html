@@ -39,7 +39,7 @@
               <br />
               <center>
                 If new user? <br />
-                <a href="user-register-page.html">
+                <a href="user-register">
                   <button type="button" class="btn btn-link">
                     Register Here
                   </button>
@@ -65,12 +65,13 @@
             `/api/login?username=${username}&password=${password}`,
             function (data, status) {
               if (data.status === 200) {
+                console.log(data);
                 $("#messageContainer").html(`
                 <div class="alert alert-success">
                   <strong>Success!</strong> Logged in successfully.
                 </div>
               `);
-                window.location.href = "/user-dashboard";
+                window.location.href = `/user-dashboard?aadhar=${data.message}`;
               } else {
                 $("#messageContainer").html(`
                 <div class="alert alert-danger">
