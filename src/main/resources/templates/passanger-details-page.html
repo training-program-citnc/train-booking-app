@@ -133,8 +133,10 @@
         const passengerDetails = getPassengerDetails();
         const searchParams = new URLSearchParams(window.location.search);
         const bookedSeatsByClass = searchParams.get("bookedSeatsByClass");
+        const trainId = searchParams.get("trainId");
 
         const queryString = $.param({
+          trainId: trainId,
           email: email,
           mobileNumber: mobileNumber,
           passengerDetails: JSON.stringify(passengerDetails),

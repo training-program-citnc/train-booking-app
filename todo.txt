@@ -1,10 +1,9 @@
-- accept multiple classes in book-ticket                                            [progress]
+- accept multiple classes in book-ticket                                            [resolved]
 - automatic redirect from create-ticket to user-dashboard                           [resolved]
-- undefined fields in created ticket in user-dashboard                              [progress]
+- undefined fields in created ticket in user-dashboard                              [resolved]
 - check box issue in passanger-details                                              [resolved]
 - view-booked-ticket in generated ticket going to html page instead of endpoint     [resolved]
 - drop box not working in search-booked-ticket-details                              [resolved]
-- fix ticket information field in view-booked-ticket
-- add button to come back to admin dashboard in view-booked-ticket page 
+- add button to come back to admin dashboard in view-booked-ticket page             [resolved]
 - auto fill fields in edit-train                                                    [resolved]
 - auto redirect from forget password to login page                                  [resolved]
