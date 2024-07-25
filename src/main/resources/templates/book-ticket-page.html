@@ -315,7 +315,12 @@
       }
 
       $(document).ready(function () {
-        var bookedSeatsByClass = {};
+        var bookedSeatsByClass = {
+          "3A": [],
+          "2A": [],
+          "1A": [],
+          SL: [],
+        };
         var selectedClass = null;
 
         function updateSeatDisplay() {
@@ -337,11 +342,6 @@
           }
 
           var seatId = $(this).text().trim();
-
-          if (!bookedSeatsByClass[selectedClass]) {
-            bookedSeatsByClass[selectedClass] = [];
-          }
-
           if ($(this).css("background-color") === "rgb(0, 128, 0)") {
             $(this).css("background-color", "");
             var index = bookedSeatsByClass[selectedClass].indexOf(seatId);
@@ -355,21 +355,16 @@
             }
           }
 
-          console.log(
-            "Booked Seats for " + selectedClass + ":",
-            bookedSeatsByClass[selectedClass]
-          );
+          console.log("Booked Seats for all classes:", bookedSeatsByClass);
         });
 
         $(".card1 .btn-primary").click(function (e) {
           e.preventDefault();
 
           $(".card1 .btn-primary").css("background-color", "");
-
           $(this).css("background-color", "green");
 
           selectedClass = $(this).closest(".card-body1").find("h1").text();
-
           console.log("Selected Class:", selectedClass);
 
           updateSeatDisplay();
@@ -377,10 +372,14 @@
 
         $("#book-ticket-btn").click(function (e) {
           e.preventDefault();
+          const searchParams = new URLSearchParams(window.location.search);
+          const trainId = searchParams.get("train_number");
           const queryParams = new URLSearchParams({
+            trainId: trainId,
             bookedSeatsByClass: JSON.stringify(bookedSeatsByClass),
             selectedClass: selectedClass,
           });
+          console.log(queryParams);
           window.location.href = `/passanger-details?${queryParams}`;
         });
       });
