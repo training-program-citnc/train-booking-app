@@ -211,8 +211,9 @@
 
       async function updateBookedTicketsDisplay() {
         const usernameComponent = document.getElementById("user-name");
-        const searchParams = new URLSearchParams(window.location.search);
-        const aadhar = searchParams.get("aadhar");
+        // const searchParams = new URLSearchParams(window.location.search);
+        // const aadhar = searchParams.get("aadhar");
+        const aadhar = localStorage.getItem("aadhar");
 
         const user = await fetchUserData(aadhar);
         usernameComponent.innerText = user.username;

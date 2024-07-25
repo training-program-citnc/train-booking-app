@@ -22,6 +22,10 @@
           <button class="btn btn-primary">Admin Dashboard</button>
         </a>
       </div> -->
+
+      <a id="back-btn">
+        <button class="btn btn-primary">Go Back</button>
+      </a>
     </center>
 
     <div class="container mt-3">
@@ -205,6 +209,15 @@
       document.addEventListener("DOMContentLoaded", function () {
         const searchParams = new URLSearchParams(window.location.search);
         const pnr = searchParams.get("pnr");
+
+        const backBtn = document.getElementById("back-btn");
+        backBtn.addEventListener("click", function () {
+          if (localStorage.getItem("aadhar")) {
+            window.location.href = "/user-dashboard";
+          } else {
+            window.location.href = "/admin-dashboard";
+          }
+        });
 
         function fetchDetails() {
           fetch(`/api/get-ticket?pnr=${pnr}`)

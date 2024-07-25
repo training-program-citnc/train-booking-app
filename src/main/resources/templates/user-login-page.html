@@ -71,7 +71,8 @@
                   <strong>Success!</strong> Logged in successfully.
                 </div>
               `);
-                window.location.href = `/user-dashboard?aadhar=${data.message}`;
+                localStorage.setItem("aadhar", data.message);
+                window.location.href = `/user-dashboard`;
               } else {
                 $("#messageContainer").html(`
                 <div class="alert alert-danger">

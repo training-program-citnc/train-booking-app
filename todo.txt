@@ -1,0 +1,10 @@
+- accept multiple classes in book-ticket
+- automatic redirect from create-ticket to user-dashboard [resolved]
+- undefined fields in created ticket in user-dashboard
+- checkbox issue in create ticket page
+- view-booked-ticket in generated ticket going to html page instead of endpoint
+- check box not working in search-booked-ticket-details
+- fix ticket information field in view-booked-ticket
+- add button to come back to admin dashboard in view-booked-ticket page
+- auto fill fields in edit-train
+- auto redirect from forget password to login page
