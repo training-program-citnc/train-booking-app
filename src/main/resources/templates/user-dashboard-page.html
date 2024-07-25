@@ -28,15 +28,15 @@
       <div class="mt-4">
         <br />
         <br />
-        <a href="book-ticket">
+        <!-- <a href="book-ticket">
           <button type="button" class="btn btn-primary">Book Tickets</button>
-        </a>
+        </a> -->
 
-        <a href="cancel-ticket">
-          <button type="button" class="btn btn-primary">Cancel Ticket</button>
-        </a>
         <a href="ticket-search">
           <button type="button" class="btn btn-primary">Search Train</button>
+        </a>
+        <a href="cancel-ticket">
+          <button type="button" class="btn btn-primary">Cancel Ticket</button>
         </a>
       </div>
     </div>
@@ -225,8 +225,11 @@
           const train = await fetchTrainData(trainId);
           const users = await fetchUserTicketData(pnr);
 
+          console.log(trainId);
+
           const adminUser = users[0]?.name;
           const trainName = train.trainName;
+          console.log(trainName);
           const from = train.source;
           const to = train.destination;
           const date = train.date;
