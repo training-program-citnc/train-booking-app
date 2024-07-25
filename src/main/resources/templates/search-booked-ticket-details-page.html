@@ -37,16 +37,12 @@
                   Select Station
                   <span class="caret"></span>
                 </button>
-                <ul
-                  id="fromStationList"
-                  class="dropdown-menu"
-                  aria-labelledby="fromDropdown"
-                >
-                  <li><a href="#" class="dropdown-item">Chennai</a></li>
-                  <li><a href="#" class="dropdown-item">Bangalore</a></li>
-                  <li><a href="#" class="dropdown-item">Delhi</a></li>
-                  <li><a href="#" class="dropdown-item">Mumbai</a></li>
-                  <li><a href="#" class="dropdown-item">Kerala</a></li>
+                <ul class="dropdown-menu" aria-labelledby="fromDropdown">
+                  <li><a href="#" class="fromStation">Chennai</a></li>
+                  <li><a href="#" class="fromStation">Bangalore</a></li>
+                  <li><a href="#" class="fromStation">Delhi</a></li>
+                  <li><a href="#" class="fromStation">Mumbai</a></li>
+                  <li><a href="#" class="fromStation">Kerala</a></li>
                 </ul>
               </div>
             </div>
@@ -62,16 +58,12 @@
                   Select Station
                   <span class="caret"></span>
                 </button>
-                <ul
-                  id="toStationList"
-                  class="dropdown-menu"
-                  aria-labelledby="toDropdown"
-                >
-                  <li><a href="#" class="dropdown-item">Chennai</a></li>
-                  <li><a href="#" class="dropdown-item">Bangalore</a></li>
-                  <li><a href="#" class="dropdown-item">Delhi</a></li>
-                  <li><a href="#" class="dropdown-item">Mumbai</a></li>
-                  <li><a href="#" class="dropdown-item">Kerala</a></li>
+                <ul class="dropdown-menu" aria-labelledby="toDropdown">
+                  <li><a href="#" class="toStation">Chennai</a></li>
+                  <li><a href="#" class="toStation">Bangalore</a></li>
+                  <li><a href="#" class="toStation">Delhi</a></li>
+                  <li><a href="#" class="toStation">Mumbai</a></li>
+                  <li><a href="#" class="toStation">Kerala</a></li>
                 </ul>
               </div>
             </div>
@@ -100,14 +92,31 @@
       </div>
     </div>
     <script>
+      $(document).ready(function () {
+        let selectedFrom = "";
+        let selectedTo = "";
+
+        $(".fromStation").click(function () {
+          selectedFrom = $(this).text();
+          $("#fromDropdown").html(
+            selectedFrom + ' <span class="caret"></span>'
+          );
+        });
+
+        $(".toStation").click(function () {
+          selectedTo = $(this).text();
+          $("#toDropdown").html(selectedTo + ' <span class="caret"></span>');
+        });
+      });
+
       $("#ticketSearchForm").on("submit", function (event) {
         event.preventDefault();
 
         const trainId = $("#trainId").val();
-        const from = $("#fromDropdown").text().trim();
-        const to = $("#toDropdown").text().trim();
-        const date = $("#date").val();
-        const time = $("#time").val();
+        // const from = $("#fromDropdown").text().trim();
+        // const to = $("#toDropdown").text().trim();
+        // const date = $("#date").val();
+        // const time = $("#time").val();
 
         window.location.href = "/view-booked-ticket?trainId=" + trainId;
       });
