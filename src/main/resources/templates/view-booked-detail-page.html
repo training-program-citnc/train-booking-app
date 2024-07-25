@@ -247,11 +247,11 @@
                 .then((response) => response.json())
                 .then((paymentData) => {
                   document.getElementById("paymentMethod").value =
-                    paymentData.paymentMethod;
+                    paymentData.method;
                   document.getElementById("totalPrice").value =
                     paymentData.amount;
                   document.getElementById("passengerEmail").value =
-                    paymentData.passengerEmail;
+                    paymentData.email;
                   document.getElementById("mobileNumber").value =
                     paymentData.passengerMobileNumber;
                 });
