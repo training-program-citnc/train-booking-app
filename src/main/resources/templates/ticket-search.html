@@ -199,7 +199,11 @@
       function checkTrainAvailability() {
         const from = document.getElementById("fromDropdown").innerText.trim();
         const to = document.getElementById("toDropdown").innerText.trim();
-        const date = document.getElementById("date").value;
+        const date = document
+          .getElementById("date")
+          .value.split("-")
+          .reverse()
+          .join("-");
 
         const api = `/api/search-train?source=${from}&destination=${to}&date=${date}`;
         console.log(api);
