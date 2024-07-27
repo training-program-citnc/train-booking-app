@@ -187,6 +187,7 @@
             type: "GET",
             success: function (response) {
               $("#successAlert").show();
+              window.location.href = "/user-login";
             },
             error: function (error) {
               alert("Registration failed: " + error.responseText);

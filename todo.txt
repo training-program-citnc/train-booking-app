@@ -7,3 +7,8 @@
 - add button to come back to admin dashboard in view-booked-ticket page             [resolved]
 - auto fill fields in edit-train                                                    [resolved]
 - auto redirect from forget password to login page                                  [resolved]
+- automatic redirect back to admin dashboard in create-train page                   [resolved]
+- automatic redirect back to registeration page in login page                       [resolved]
+- date format issue in search train and create train are not consistent             [resolved]
+- rendering seat issue in book-ticket page
+- add successfully canceled alert in cancel-ticket page

@@ -125,6 +125,7 @@
             type: "GET",
             success: function (response) {
               alert("Train created successfully");
+              window.location.href = "/admin-dashboard";
             },
             error: function (error) {
               alert("Failed to create train: " + error.responseText);
