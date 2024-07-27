@@ -48,6 +48,7 @@
 
     <script>
       function createBookedTicketElement(
+        trainId,
         pnr,
         passenger_name,
         train_name,
@@ -125,6 +126,11 @@
                   View Booked Ticket
                 </button>
               </a>
+              <a href="book-ticket?train_number=${trainId}">
+                <button type="button" class="btn btn-default">
+                  Book More
+                </button>
+              </a>
             </div>
             <div class="col-xs-6 text-right">
               <div class="dropdown">
@@ -143,6 +149,7 @@
       }
 
       function displayBookedTicket(
+        trainId,
         pnr,
         passenger_name,
         train_name,
@@ -155,6 +162,7 @@
       ) {
         const container = document.getElementById("booked-tickets-container");
         const ticketElement = createBookedTicketElement(
+          trainId,
           pnr,
           passenger_name,
           train_name,
@@ -239,6 +247,7 @@
           const usernames = [];
           users.forEach((user) => usernames.push(user.name));
           displayBookedTicket(
+            trainId,
             pnr,
             adminUser,
             trainName,

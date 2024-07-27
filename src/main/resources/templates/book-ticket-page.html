@@ -383,7 +383,10 @@
             );
             return;
           }
+          const searchParams = new URLSearchParams(window.location.search);
+          const trainId = searchParams.get("train_number");
           const queryParams = new URLSearchParams({
+            trainId: trainId,
             bookedSeatsByClass: JSON.stringify(bookedSeatsByClass),
             selectedClass: selectedClass,
           });

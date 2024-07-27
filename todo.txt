@@ -12,3 +12,4 @@
 - date format issue in search train and create train are not consistent             [resolved]
 - rendering seat issue in book-ticket page                                          [resolved]
 - add successfully canceled alert in cancel-ticket page                             [resolved]      
+- book more button in ticket card in user-dashboard                                 [resolved]
