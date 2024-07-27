@@ -324,13 +324,14 @@
         var selectedClass = null;
 
         function updateSeatDisplay() {
-          $(".seat-btn").css("background-color", ""); // Reset all seats
+          $(".seat-btn").css("background-color", ""); // Reset all seats to default color
           if (selectedClass && bookedSeatsByClass[selectedClass]) {
             bookedSeatsByClass[selectedClass].forEach(function (seatId) {
-              $(".seat-btn:contains(" + seatId + ")").css(
-                "background-color",
-                "green"
-              );
+              $(".seat-btn")
+                .filter(function () {
+                  return $(this).text().trim() === seatId;
+                })
+                .css("background-color", "green");
             });
           }
         }
@@ -342,15 +343,16 @@
           }
 
           var seatId = $(this).text().trim();
+
           if ($(this).css("background-color") === "rgb(0, 128, 0)") {
-            $(this).css("background-color", "");
+            $(this).css("background-color", ""); // Reset to default color
             var index = bookedSeatsByClass[selectedClass].indexOf(seatId);
             if (index !== -1) {
               bookedSeatsByClass[selectedClass].splice(index, 1);
             }
           } else {
             $(this).css("background-color", "green");
-            if (bookedSeatsByClass[selectedClass].indexOf(seatId) === -1) {
+            if (!bookedSeatsByClass[selectedClass].includes(seatId)) {
               bookedSeatsByClass[selectedClass].push(seatId);
             }
           }
@@ -361,8 +363,8 @@
         $(".card1 .btn-primary").click(function (e) {
           e.preventDefault();
 
-          $(".card1 .btn-primary").css("background-color", "");
-          $(this).css("background-color", "green");
+          $(".card1 .btn-primary").css("background-color", ""); // Reset all class buttons
+          $(this).css("background-color", "green"); // Highlight selected class button
 
           selectedClass = $(this).closest(".card-body1").find("h1").text();
           console.log("Selected Class:", selectedClass);
@@ -372,17 +374,31 @@
 
         $("#book-ticket-btn").click(function (e) {
           e.preventDefault();
-          const searchParams = new URLSearchParams(window.location.search);
-          const trainId = searchParams.get("train_number");
+          if (
+            !selectedClass ||
+            bookedSeatsByClass[selectedClass].length === 0
+          ) {
+            alert(
+              "Please select a class and at least one seat before booking."
+            );
+            return;
+          }
           const queryParams = new URLSearchParams({
-            trainId: trainId,
             bookedSeatsByClass: JSON.stringify(bookedSeatsByClass),
             selectedClass: selectedClass,
           });
-          console.log(queryParams);
-          window.location.href = `/passanger-details?${queryParams}`;
+          window.location.href = `/passenger-details?${queryParams}`;
         });
+
+        // Initialize with no class selected
+        updateSeatDisplay();
       });
+
+      function createTicket(selectedClass, bookedSeatsByClass) {
+        $.get(
+          `http://localhost:8080/api/create-ticket?pnr=123&trainId=123&paymentMethod=netbanking&amount=2500&passengerEmail=r.rahul.developer@gmail.com&passengerMobileNumber=8002030975`
+        );
+      }
     </script>
   </body>
 </html>
