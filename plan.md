@@ -50,6 +50,10 @@ https://www.w3schools.com/jquery/jquery_quiz.asp
 https://www.w3schools.com/bootstrap/bootstrap_quiz.asp
 https://www.tutorialspoint.com/spring/spring_online_quiz.htm
 
+**FIGMA PAGE LINK**
+
+https://www.figma.com/design/cVR6UP4R0QMcPrfhjVkWIb/Train-Booking-App?node-id=0-1&t=zTWuHCelJWynEzRm-1
+
 - FIGMA PAGES (Rahul)
 
   - Main Page
@@ -144,7 +148,7 @@ SPRING BOOT DEPENDENCIES
 - MySQL Driver
 - Spring Boot Starter Mail
 
-SUNDAY (4 AUGUST) (2 HOURS) (DAY 5) (1 HOUR)
+## SUNDAY (4 AUGUST) (2 HOURS) (DAY 5) (1 HOUR)
 
 DOCUMENTATION (No Code)
 
