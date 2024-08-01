@@ -114,7 +114,7 @@
             trainNumber: $("#trainId").val(),
             source: selectedFrom,
             destination: selectedTo,
-            date: $("#date").val(),
+            date: $("#date").val().split("-").reverse().join("-"),
             time: $("#time").val(),
           };
 

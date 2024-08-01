@@ -61,7 +61,14 @@
       </div>
     </div>
     <script>
-      function createTrainDetailElement(train_name, from, to, date, time) {
+      function createTrainDetailElement(
+        train_id,
+        train_name,
+        from,
+        to,
+        date,
+        time
+      ) {
         const trainDetails = document.createElement("div");
         trainDetails.className = "col-md-12";
         trainDetails.style.border = "1px solid #ddd";
@@ -70,7 +77,7 @@
         trainDetails.style.marginBottom = "20px";
 
         trainDetails.innerHTML = `
-    <h2>${train_name} <small class="text-muted">#1234</small></h2>
+    <h2>${train_name} <small class="text-muted">#${train_id}</small></h2>
     <div class="row">
       <div class="col-xs-6">
         <small>From:</small>
@@ -97,9 +104,10 @@
         return trainDetails;
       }
 
-      function displayTrainDetails(train_name, from, to, date, time) {
+      function displayTrainDetails(train_id, train_name, from, to, date, time) {
         const container = document.getElementById("train-details-container");
         const trainDetailElement = createTrainDetailElement(
+          train_id,
           train_name,
           from,
           to,
@@ -124,6 +132,7 @@
         const trains = await fetchTrainData();
         trains.forEach((train) => {
           displayTrainDetails(
+            train.trainNumber,
             train.trainName,
             train.source,
             train.destination,

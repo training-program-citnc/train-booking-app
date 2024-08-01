@@ -13,3 +13,5 @@
 - rendering seat issue in book-ticket page                                          [resolved]
 - add successfully canceled alert in cancel-ticket page                             [resolved]      
 - book more button in ticket card in user-dashboard                                 [resolved]
+- edit train bug with date and duplicate entries
+- add restriction on creating new trains in edit-train
