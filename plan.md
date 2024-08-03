@@ -22,11 +22,11 @@
     - Team 5 - Sharvari (leader), Virat, Darshan K R, Divesh
   - NOTE : Same meet link
   - Allocation of application title for each team
-    - Movie Ticket Booking
-    - Flight Ticket Booking
-    - Bus Ticket Booking
-    - IPL Ticket Booking
-    - Hotel Booking
+    - Movie Ticket Booking --> https://in.bookmyshow.com/
+    - Flight Ticket Booking --> https://www.makemytrip.com/flights/
+    - Bus Ticket Booking --> https://www.redbus.in/
+    - IPL Ticket Booking --> https://www.iplt20.com/about/ticket-term?id=9
+    - Hotel Booking --> https://www.agoda.com/
     - https://pickerwheel.com/
     - **Task:** Identify the use cases and the relationship between the use cases using paper and pen
 
