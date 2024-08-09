@@ -10,14 +10,20 @@
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+      function logout() {
+        localStorage.removeItem("aadhar");
+        window.location.href = "/";
+      }
+    </script>
   </head>
   <body>
     <div class="container">
       <div class="pull-right">
         <br />
-        <a href="/">
-          <button type="button" class="btn btn-primary">Logout</button>
-        </a>
+        <button type="button" class="btn btn-primary" onclick="logout()">
+          Logout
+        </button>
       </div>
 
       <br />
@@ -227,6 +233,9 @@
         usernameComponent.innerText = user.username;
 
         const tickets = await fetchTicketData(user.email);
+
+        console.log(tickets);
+
         tickets.forEach(async (ticket) => {
           const pnr = ticket.pnr;
           const trainId = ticket.trainId;
@@ -273,7 +282,7 @@
         //   "B12",
         //   ["Rahul", "Sahil", "Sam"]
         // );
-        fetchTickets();
+        // fetchTickets();
       }
 
       document.addEventListener("DOMContentLoaded", updateBookedTicketsDisplay);
