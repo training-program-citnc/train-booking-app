@@ -30,11 +30,37 @@ public class TrainController {
 
   @GetMapping("/edit-train")
   public Response editTrain(@ModelAttribute Train train) {
-    trainRepository.save(train);
-    Response response = new Response();
-    response.message = "Train Edited Successfully";
-    response.status = 200;
-    return response;
+    String trainId = train.getTrainNumber();
+
+    if (trainRepository.existsById(trainId)) {
+      Train existingTrain = trainRepository.findById(trainId).get();
+      if (train.getTrainName() != null) {
+        existingTrain.setTrainName(train.getTrainName());
+      }
+      if (train.getSource() != null) {
+        existingTrain.setSource(train.getSource());
+      }
+      if (train.getDestination() != null) {
+        existingTrain.setDestination(train.getDestination());
+      }
+      if (train.getDate() != null) {
+        existingTrain.setDate(train.getDate());
+      }
+      if (train.getTime() != null) {
+        existingTrain.setTime(train.getTime());
+      }
+
+      trainRepository.save(existingTrain);
+      Response response = new Response();
+      response.message = "Train Edited Successfully";
+      response.status = 200;
+      return response;
+    } else {
+      Response response = new Response();
+      response.message = "Train Not Found";
+      response.status = 404;
+      return response;
+    }
   }
 
   // QUERY
