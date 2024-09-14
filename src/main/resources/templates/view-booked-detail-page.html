@@ -223,16 +223,18 @@
           fetch(`/api/get-ticket?pnr=${pnr}`)
             .then((response) => response.json())
             .then((ticketData) => {
+              console.log(ticketData);
+
               document.getElementById("trainId").value = ticketData.trainId;
               document.getElementById("pnrNumber").value = ticketData.pnr;
-              document.getElementById("trainTime").value =
-                ticketData.time || "NA";
 
               return fetch(
                 `http://localhost:8080/api/search-train-by-id?trainId=1234`
               )
                 .then((response) => response.json())
                 .then((trainData) => {
+                  document.getElementById("trainTime").value =
+                    trainData.time || "NA";
                   document.getElementById("journeyDate").value = trainData.date;
                   document.getElementById("journeyFrom").value =
                     trainData.source;

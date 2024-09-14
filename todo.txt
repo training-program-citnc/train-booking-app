@@ -16,13 +16,13 @@
 - edit train bug with date and duplicate entries                                    [resolved]                    
 - add restriction on creating new trains in edit-train                              [resolved]
 - rename search ticket to search train                                              [resolved]                                 
-- save state of the search in search-train-page when user is not logged in
+- save state of the search in search-train-page when user is not logged in          [resolved]
   show it as a book ticket button
-- time showing NA in view-booked-details-page
+- time showing NA in view-booked-details-page                                       [resolved]
 
 
 NOTE
-- case 1 : search -> login -> book tickets (save state of the search train)
+- case 1 : search -> login -> book tickets (save state of the search train)         [resolved]
 - case 2 : login -> search -> book tickets
 
 - update forgot password email service                                              [resolved]
