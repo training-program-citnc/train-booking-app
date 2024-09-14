@@ -66,9 +66,9 @@ public class MainController {
     return "search-booked-ticket-details-page.html";
   }
 
-  @GetMapping("/ticket-search")
+  @GetMapping("/search-train")
   public String ticketSearchPage() {
-    return "ticket-search.html";
+    return "search-train.html";
   }
 
   @GetMapping("/user-dashboard")

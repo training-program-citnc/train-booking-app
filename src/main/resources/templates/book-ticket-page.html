@@ -402,6 +402,15 @@
           `http://localhost:8080/api/create-ticket?pnr=123&trainId=123&paymentMethod=netbanking&amount=2500&passengerEmail=r.rahul.developer@gmail.com&passengerMobileNumber=8002030975`
         );
       }
+
+      function clearCache() {
+        const cacheTrainNumber = localStorage.getItem("train_number");
+        if (cacheTrainNumber) {
+          localStorage.removeItem("train_number");
+        }
+      }
+
+      clearCache();
     </script>
   </body>
 </html>

@@ -169,6 +169,7 @@
       }
 
       function redirectToLogin(train_number) {
+        localStorage.setItem("train_number", train_number);
         if (localStorage.getItem("aadhar")) {
           window.location.href = `/book-ticket?train_number=${train_number}`;
         } else {

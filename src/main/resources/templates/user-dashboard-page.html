@@ -38,12 +38,13 @@
           <button type="button" class="btn btn-primary">Book Tickets</button>
         </a> -->
 
-        <a href="ticket-search">
+        <a th:href="@{search-train}">
           <button type="button" class="btn btn-primary">Search Train</button>
         </a>
         <a href="cancel-ticket">
           <button type="button" class="btn btn-primary">Cancel Ticket</button>
         </a>
+        <span class="view-booked-ticket-placeholder"></span>
       </div>
     </div>
 
@@ -53,6 +54,22 @@
     </div>
 
     <script>
+      function loadViewBookedTicketCache() {
+        const ticketNumber = localStorage.getItem("train_number");
+        const placeholder = document.querySelector(
+          ".view-booked-ticket-placeholder"
+        );
+        if (ticketNumber) {
+          placeholder.innerHTML = `
+            <a href="book-ticket?train_number=${ticketNumber}">
+              <button type="button" class="btn btn-primary">
+                View Booked Ticket
+              </button>
+            </a>
+          `;
+        }
+      }
+
       function createBookedTicketElement(
         trainId,
         pnr,
@@ -285,7 +302,10 @@
         // fetchTickets();
       }
 
-      document.addEventListener("DOMContentLoaded", updateBookedTicketsDisplay);
+      document.addEventListener("DOMContentLoaded", () => {
+        updateBookedTicketsDisplay();
+        loadViewBookedTicketCache();
+      });
     </script>
   </body>
 </html>
