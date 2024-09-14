@@ -24,3 +24,5 @@
 NOTE
 - case 1 : search -> login -> book tickets (save state of the search train)
 - case 2 : login -> search -> book tickets
+
+- update forgot password email service
