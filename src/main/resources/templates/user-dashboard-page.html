@@ -16,8 +16,54 @@
         window.location.href = "/";
       }
     </script>
+  
+      <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+        .gradient-advanced {
+            background: #a8edea;
+  
+            /* Chrome 10-25, Safari 5.1-6 */
+            background: -webkit-linear-gradient(to right, rgba(168,237,234,0.5), rgba(254,214,227,0.5));
+          
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background: linear-gradient(to right, rgba(168,237,234,0.5), rgba(254,214,227,0.5));
+            background-blend-mode: screen, color-dodge, overlay, difference, normal;
+            min-height: 100%;
+            padding-bottom: 50px;
+        }
+        .btn {
+            font-size: 25px;
+            margin-right: 15px;
+        }
+        .action-buttons {
+            margin-top: 30px;
+            margin-left: 15px;
+        }
+        .logout-btn {
+            margin-top: 20px;
+        }
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            margin-left: 15px;
+        }
+        .full-width {
+            width: 100%;
+            padding-right: 15px;
+        }
+        .left-align {
+            margin-right: 20px;
+        }
+    </style>
+    </style>
   </head>
   <body>
+    <div class="gradient-advanced">
+    
+
     <div class="container">
       <div class="pull-right">
         <br />
@@ -51,6 +97,7 @@
     <div class="container mt-4">
       <!-- <h2>Your Booked Tickets</h2> -->
       <div id="booked-tickets-container"></div>
+    </div>
     </div>
 
     <script>
