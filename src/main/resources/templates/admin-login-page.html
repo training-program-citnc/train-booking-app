@@ -50,7 +50,7 @@
           <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
             <form id="loginForm">
               <div class="data-form">
-                <h2 class="fw-bold mb-6">User Login</h2>
+                <h2 class="fw-bold mb-6">Admin Login</h2>
                 <br />
                 <div class="form-group">
                   <label for="usr">Username</label>
@@ -70,7 +70,7 @@
                 <div class="form-group mt-3">
                   <center>
                     If new user? <br />
-                    <a href="user-register">
+                    <a href="admin-register">
                       <button
                         type="button"
                         class="btn btn-link"
@@ -96,6 +96,8 @@
           e.preventDefault();
           const username = $("#usr").val();
           const password = $("#pwd").val();
+
+          console.log(username, password);
 
           $.get(
             `/api/admin-login?username=${username}&password=${password}`,
