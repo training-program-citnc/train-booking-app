@@ -26,3 +26,12 @@ NOTE
 - case 2 : login -> search -> book tickets
 
 - update forgot password email service                                              [resolved]
+
+- instead of book now button in search page it should be login (not logged in)
+- view booked ticket go back redirecting to user dashboard
+
+
+FUTURE WORKS
+- In view booked ticket page, total number of tickets booked and the 
+  number of tickets booked in each category values are static which can 
+  be made dynamic
