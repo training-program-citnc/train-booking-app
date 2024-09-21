@@ -11,16 +11,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-      body, html {
+      body,
+      html {
         height: 100%;
         margin: 0;
         transition: background-color 0.4s ease;
-        background: linear-gradient(to right, rgba(251, 194, 235, 0.55), rgba(166, 193, 238, 0.55));
+        background: linear-gradient(
+          to right,
+          rgba(251, 194, 235, 0.55),
+          rgba(166, 193, 238, 0.55)
+        );
       }
       .gradient-advanced {
         background: #a8edea;
-        background: -webkit-linear-gradient(to right, rgba(168, 237, 234, 0.5), rgba(254, 214, 227, 0.5));
-        background: linear-gradient(to right, rgba(168, 237, 234, 0.5), rgba(254, 214, 227, 0.5));
+        background: -webkit-linear-gradient(
+          to right,
+          rgba(168, 237, 234, 0.5),
+          rgba(254, 214, 227, 0.5)
+        );
+        background: linear-gradient(
+          to right,
+          rgba(168, 237, 234, 0.5),
+          rgba(254, 214, 227, 0.5)
+        );
         background-blend-mode: screen, color-dodge, overlay, difference, normal;
         min-height: 100%;
         padding-bottom: 50px;
@@ -30,7 +43,7 @@
         margin-right: 15px;
       }
       .btn:hover {
-        background-color: #2E073F;
+        background-color: #2e073f;
       }
       .action-buttons {
         margin-top: 30px;
@@ -53,13 +66,21 @@
       }
       .gradient-advanced:hover {
         background: #a8edea;
-        background: -webkit-linear-gradient(to right, rgba(93, 184, 179, 0.556), rgba(254, 214, 227, 0.5));
-        background: linear-gradient(to right, rgba(0, 255, 247, 0.505), rgba(254, 214, 227, 0.738));
+        background: -webkit-linear-gradient(
+          to right,
+          rgba(93, 184, 179, 0.556),
+          rgba(254, 214, 227, 0.5)
+        );
+        background: linear-gradient(
+          to right,
+          rgba(0, 255, 247, 0.505),
+          rgba(254, 214, 227, 0.738)
+        );
         background-blend-mode: screen, color-dodge, overlay, difference, normal;
         min-height: 100%;
         padding-bottom: 50px;
       }
-      .train-details {
+      .movie-details {
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 15px;
@@ -67,16 +88,15 @@
         background-color: #fff;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
-      .train-details h2 {
+      .movie-details h2 {
         margin-top: 0;
       }
-      .train-details .row > div {
+      .movie-details .row > div {
         margin-bottom: 10px;
       }
-      .train-details .lead {
+      .movie-details .lead {
         font-size: 18px;
       }
-      
     </style>
   </head>
   <body>
@@ -84,22 +104,22 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-xs-12 text-right">
-            <a href="/">
-              <button type="button" class="btn btn-primary logout-btn">
-                Logout
-              </button>
-            </a>
+            <button type="button" class="btn btn-primary logout-btn">
+              Logout
+            </button>
           </div>
         </div>
-        <h1 class="mt-4" style="color:black">
+        <h1 class="mt-4" style="color: black">
           Good Morning, Admin<span id="user-name"></span>
-          <span style="color: rgb(0, 0, 0); font-size:24px;"> (Admin Dashboard)</span>
+          <span style="color: rgb(0, 0, 0); font-size: 24px">
+            (Admin Dashboard)</span
+          >
         </h1>
         <div class="left-align">
           <div class="action-buttons">
-            <a th:href="@{create-train}">
+            <a th:href="@{create-movie}">
               <button type="button" class="btn btn-primary">
-                + Create Train
+                + Create Movie
               </button>
             </a>
             <a th:href="@{search-booked-ticket-details}">
@@ -107,50 +127,52 @@
                 View Booked Ticket
               </button>
             </a>
-            <a th:href="@{delete-train}">
+            <a th:href="@{delete-movie}">
               <button type="button" class="btn btn-primary">
-                Delete Train
+                Delete Movie
               </button>
             </a>
-            <a th:href="@{edit-train}">
-              <button type="button" class="btn btn-primary">Edit Train</button>
+            <a th:href="@{edit-movie}">
+              <button type="button" class="btn btn-primary">Edit Movie</button>
             </a>
           </div>
         </div>
       </div>
-      <br/>
+      <br />
       <div class="container mt-4">
         <div class="panel panel-default">
-          <div class="panel-body" style="background-color: #f8f9fa;border-radius: 5px;border: 1px solid #000;">
-            <div id="train-details-container" class="row">
-              <!-- Train details will be dynamically inserted here -->
+          <div
+            class="panel-body"
+            style="
+              background-color: #f8f9fa;
+              border-radius: 5px;
+              border: 1px solid #000;
+            "
+          >
+            <div id="movie-details-container" class="row">
+              <!-- Movie details will be dynamically inserted here -->
             </div>
           </div>
         </div>
       </div>
     </div>
     <script>
-      function createTrainDetailElement(
-        train_id,
-        train_name,
-        from,
-        to,
+      function createMovieDetailElement(
+        movie_id,
+        movie_name,
+        location,
         date,
         time
       ) {
-        const trainDetails = document.createElement("div");
-        trainDetails.className = "col-md-12 train-details";
+        const movieDetails = document.createElement("div");
+        movieDetails.className = "col-md-12 movie-details";
 
-        trainDetails.innerHTML = `
-          <h2>${train_name} <small class="text-muted">#${train_id}</small></h2>
+        movieDetails.innerHTML = `
+          <h2>${movie_name} <small class="text-muted">#${movie_id}</small></h2>
           <div class="row">
             <div class="col-xs-6">
-              <small>From:</small>
-              <p class="lead"><strong>${from}</strong></p>
-            </div>
-            <div class="col-xs-6">
-              <small>To:</small>
-              <p class="lead"><strong>${to}</strong></p>
+              <small>Location:</small>
+              <p class="lead"><strong>${location}</strong></p>
             </div>
             <div class="col-xs-6">
               <p>Train Date: ${date}</p>
@@ -166,14 +188,14 @@
           </div>
         `;
 
-        return trainDetails;
+        return movieDetails;
       }
 
-      function displayTrainDetails(train_id, train_name, from, to, date, time) {
-        const container = document.getElementById("train-details-container");
-        const trainDetailElement = createTrainDetailElement(
-          train_id,
-          train_name,
+      function displayMovieDetails(movie_id, movie_name, from, to, date, time) {
+        const container = document.getElementById("movie-details-container");
+        const trainDetailElement = createMovieDetailElement(
+          movie_id,
+          movie_name,
           from,
           to,
           date,
@@ -182,32 +204,40 @@
         container.appendChild(trainDetailElement);
       }
 
-      async function fetchTrainData() {
-        const endpoint = `/api/all-trains`;
+      async function fetchMovieData() {
+        const endpoint = `/api/all-movie`;
         const response = await fetch(endpoint).then((response) =>
           response.json()
         );
         return response;
       }
 
-      async function updateTrainDisplay() {
-        const container = document.getElementById("train-details-container");
+      async function updateMovieDisplay() {
+        const container = document.getElementById("movie-details-container");
         container.innerHTML = ""; // Clear previous content
 
-        const trains = await fetchTrainData();
-        trains.forEach((train) => {
-          displayTrainDetails(
-            train.trainNumber,
-            train.trainName,
-            train.source,
-            train.destination,
-            train.date,
-            train.time
+        const movies = await fetchMovieData();
+        movies.forEach((movie) => {
+          displayMovieDetails(
+            movie.movieNumber,
+            movie.movieName,
+            movie.location,
+            movie.date,
+            movie.time
           );
         });
       }
 
-      document.addEventListener("DOMContentLoaded", updateTrainDisplay);
+      document.addEventListener("DOMContentLoaded", () => {
+        updateMovieDisplay();
+
+        const logoutBtn = document.querySelector(".logout-btn");
+        logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("role");
+          localStorage.removeItem("aadhar");
+          window.location.href = "/";
+        });
+      });
     </script>
   </body>
 </html>

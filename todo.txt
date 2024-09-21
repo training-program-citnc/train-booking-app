@@ -29,7 +29,7 @@ NOTE
 
 - instead of book now button in search page it should be login (not logged in)
 - view booked ticket go back redirecting to user dashboard
-
+- book ticket page the train name and train id is static instead of dynamic
 
 FUTURE WORKS
 - In view booked ticket page, total number of tickets booked and the 

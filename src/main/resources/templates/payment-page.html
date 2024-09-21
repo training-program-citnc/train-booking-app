@@ -36,8 +36,12 @@
                   <br />
                 </center>
                 <ul>
-                  <li>Number of Passenger = <span id="number-passenger"></span></li>
-                  <li>Selected Classes = <span id="selected-classes"></span></li>
+                  <li>
+                    Number of Passenger = <span id="number-audience"></span>
+                  </li>
+                  <li>
+                    Selected Classes = <span id="selected-classes"></span>
+                  </li>
                   <li>Total Price = <span id="price"></span></li>
                 </ul>
                 <br />
@@ -73,12 +77,17 @@
                     </button>
                     <ul class="dropdown-menu" style="width: 100%">
                       <li onclick="setMode('UPI')"><a>UPI</a></li>
-                      <li onclick="setMode('Net Banking')"><a>Net Banking</a></li>
+                      <li onclick="setMode('Net Banking')">
+                        <a>Net Banking</a>
+                      </li>
                     </ul>
                   </div>
                 </div>
 
-                <button class="btn btn-primary btn-block" onclick="handleSubmit()">
+                <button
+                  class="btn btn-primary btn-block"
+                  onclick="handleSubmit()"
+                >
                   Pay Now
                 </button>
 
@@ -91,42 +100,42 @@
     </div>
 
     <script>
-      const _3A_COST = 3000;
-      const _2A_COST = 2000;
-      const _1A_COST = 1000;
-      const _SL_COST = 500;
+      const _VB_COST = 3000;
+      const _FS_COST = 2000;
+      const _BS_COST = 1000;
+      const _VP_COST = 500;
 
       const searchParams = new URLSearchParams(window.location.search);
       const email = searchParams.get("email");
       const mobileNumber = searchParams.get("mobileNumber");
-      const passengerDetails = JSON.parse(
-        decodeURIComponent(searchParams.get("passengerDetails"))
+      const audienceDetails = JSON.parse(
+        decodeURIComponent(searchParams.get("audienceDetails"))
       );
       const bookedSeatsByClass = JSON.parse(
         decodeURIComponent(searchParams.get("bookedSeatsByClass"))
       );
 
-      const numPassengerComponent = document.getElementById("number-passenger");
+      const numAudienceComponent = document.getElementById("number-audience");
       const selectedClassesComponent =
         document.getElementById("selected-classes");
       const priceComponent = document.getElementById("price");
 
-      let totalPassengers = 0;
+      let totalAudience = 0;
       let selectedClasses = [];
       let price = 0;
 
       Object.entries(bookedSeatsByClass).forEach(([className, seats]) => {
         if (seats.length > 0) {
-          totalPassengers += seats.length;
+          totalAudience += seats.length;
           selectedClasses.push(className);
-          if (className === "3A") price += _3A_COST * seats.length;
-          else if (className === "2A") price += _2A_COST * seats.length;
-          else if (className === "1A") price += _1A_COST * seats.length;
-          else if (className === "SL") price += _SL_COST * seats.length;
+          if (className === "VB") price += _VB_COST * seats.length;
+          else if (className === "FS") price += _FS_COST * seats.length;
+          else if (className === "BS") price += _BS_COST * seats.length;
+          else if (className === "VP") price += _VP_COST * seats.length;
         }
       });
 
-      numPassengerComponent.textContent = totalPassengers;
+      numAudienceComponent.textContent = totalAudience;
       selectedClassesComponent.textContent = selectedClasses.join(", ");
       priceComponent.textContent = price;
 
@@ -139,7 +148,7 @@
         mode = modeValue;
       }
 
-      const trainId = searchParams.get("trainId");
+      const movieId = searchParams.get("movieId");
 
       async function handleSubmit(e) {
         const enteredPriceComponent = document.getElementById("input-price");
@@ -162,17 +171,17 @@
         const pnr = generatePNR();
         console.log(email);
         const createTicketResponse = await fetch(
-          `/api/create-ticket?pnr=${pnr}&trainId=${trainId}&method=${mode}&amount=${price}&email=${email}&passengerMobileNumber=${mobileNumber}`
+          `/api/create-ticket?pnr=${pnr}&movieId=${movieId}&method=${mode}&amount=${price}&email=${email}&audienceMobileNumber=${mobileNumber}`
         );
-        console.log(passengerDetails);
+        console.log(audienceDetails);
 
-        for (let i = 0; i < passengerDetails.length; i++) {
+        for (let i = 0; i < audienceDetails.length; i++) {
           console.log(i);
-          const passenger = passengerDetails[i];
-          const name = passenger.passengerName;
-          const age = passenger.age;
-          const gender = passenger.gender;
-          const classType = passenger.classType;
+          const audience = audienceDetails[i];
+          const name = audience.audienceName;
+          const age = audience.age;
+          const gender = audience.gender;
+          const classType = audience.classType;
           const seats = bookedSeatsByClass[classType];
           const seat = seats[i % seats.length]; // Cycle through seats if more passengers than seats
           const className = seat.substring(0, seat.length - 1);
@@ -180,10 +189,10 @@
           if (className === "SUB" || className === "UB") preference = "upper";
           else if (className === "SLB" || className === "LB")
             preference = "lower";
-          const addPassengerResponse = await fetch(
+          const addAudienceResponse = await fetch(
             `/api/add-user?pnr=${pnr}&name=${name}&age=${age}&gender=${gender}&preference=${preference}&className=${className}&price=${price}&seatNumber=${seat}`
           );
-          console.log(addPassengerResponse);
+          console.log(addAudienceResponse);
         }
         return pnr;
       }

@@ -17,7 +17,7 @@
   </head>
   <body>
     <center>
-      <h1>Train Ticket Information</h1>
+      <h1>Movie Ticket Information</h1>
 
       <!-- <div>
         <a href="/user-dashboard">
@@ -38,22 +38,22 @@
         <button
           type="button"
           class="btn btn-primary mr-3"
-          id="trainDetailsButton"
+          id="movieDetailsButton"
         >
-          Train Details
+          Movie Details
         </button>
       </div>
     </div>
     <div class="container mt-5" id="trainDetailsContainer">
       <div class="border border-dark p-4">
-        <form id="trainDetailsForm">
+        <form id="movieDetailsForm">
           <div class="row mb-3">
             <div class="col-md-6">
               <input
                 type="text"
                 class="form-control"
-                id="journeyFrom"
-                placeholder="Journey From:"
+                id="movieName"
+                placeholder="Movie Name:"
                 readonly
               />
             </div>
@@ -61,8 +61,8 @@
               <input
                 type="text"
                 class="form-control"
-                id="journeyTo"
-                placeholder="Journey To:"
+                id="location"
+                placeholder="Journey From:"
                 readonly
               />
             </div>
@@ -72,8 +72,8 @@
               <input
                 type="text"
                 class="form-control"
-                id="trainName"
-                placeholder="Train Name:"
+                id="movieTime"
+                placeholder="Train Time:"
                 readonly
               />
             </div>
@@ -92,7 +92,7 @@
               <input
                 type="text"
                 class="form-control"
-                id="trainId"
+                id="movieId"
                 placeholder="Train ID:"
                 readonly
               />
@@ -108,17 +108,6 @@
             </div>
           </div>
           <br />
-          <div class="row">
-            <div class="col-md-6">
-              <input
-                type="text"
-                class="form-control"
-                id="trainTime"
-                placeholder="Train Time:"
-                readonly
-              />
-            </div>
-          </div>
         </form>
       </div>
     </div>
@@ -128,17 +117,17 @@
         <button
           type="button"
           class="btn btn-primary mr-3"
-          id="passengerDetailsButton"
+          id="audienceDetailsButton"
         >
-          Passenger Details-1
+          Audience Details-1
         </button>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <p class="mb-0">
-          Number of Passengers: <span id="numberOfPassengers">2</span>
+          Number of Audience: <span id="numberOfAudiences">2</span>
         </p>
       </div>
     </div>
-    <div class="container mt-5" id="passengerDetailsContainer">
+    <div class="container mt-5" id="audienceDetailsContainer">
       <!-- Passenger details will be added here dynamically -->
     </div>
     <br />
@@ -190,7 +179,7 @@
             <input
               type="text"
               class="form-control"
-              id="passengerEmail"
+              id="audienceEmail"
               placeholder="Passenger Email:"
               readonly
             />
@@ -230,23 +219,21 @@
             .then((ticketData) => {
               console.log(ticketData);
 
-              document.getElementById("trainId").value = ticketData.trainId;
+              document.getElementById("movieId").value = ticketData.movieId;
               document.getElementById("pnrNumber").value = ticketData.pnr;
 
               return fetch(
-                `/api/search-train-by-id?trainId=${ticketData.trainId}`
+                `/api/search-movie-by-id?movieId=${ticketData.movieId}`
               )
                 .then((response) => response.json())
-                .then((trainData) => {
-                  document.getElementById("trainTime").value =
-                    trainData.time || "NA";
-                  document.getElementById("journeyDate").value = trainData.date;
-                  document.getElementById("journeyFrom").value =
-                    trainData.source;
-                  document.getElementById("journeyTo").value =
-                    trainData.destination;
-                  document.getElementById("trainName").value =
-                    trainData.trainName;
+                .then((movieData) => {
+                  document.getElementById("movieTime").value =
+                    movieData.time || "NA";
+                  document.getElementById("journeyDate").value = movieData.date;
+                  document.getElementById("location").value =
+                    movieData.location;
+                  document.getElementById("movieName").value =
+                    movieData.movieName;
                 });
             })
             .then(() => {
@@ -257,27 +244,27 @@
                     paymentData.method;
                   document.getElementById("totalPrice").value =
                     paymentData.amount;
-                  document.getElementById("passengerEmail").value =
+                  document.getElementById("audienceEmail").value =
                     paymentData.email;
                   document.getElementById("mobileNumber").value =
-                    paymentData.passengerMobileNumber;
+                    paymentData.audienceMobileNumber;
                 });
             })
             .then(() => {
               return fetch(`/api/get-user-ticket?pnr=${pnr}`)
                 .then((response) => response.json())
-                .then((passengerData) => {
-                  const passengerDetailsContainer = document.getElementById(
-                    "passengerDetailsContainer"
+                .then((audienceData) => {
+                  const audienceDetailsContainer = document.getElementById(
+                    "audienceDetailsContainer"
                   );
-                  const passengers = Array.isArray(passengerData)
-                    ? passengerData
-                    : [passengerData];
+                  const audiences = Array.isArray(audienceData)
+                    ? audienceData
+                    : [audienceData];
 
-                  passengerDetailsContainer.innerHTML = "";
+                  audienceDetailsContainer.innerHTML = "";
 
-                  passengers.forEach((passenger, index) => {
-                    passengerDetailsContainer.innerHTML += `
+                  audiences.forEach((audience, index) => {
+                    audienceDetailsContainer.innerHTML += `
                       <div class="border border-dark p-4 mb-3">
                         <form>
                           <div class="row mb-3">
@@ -286,7 +273,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Passenger Name:"
-                                value="${passenger.name}"
+                                value="${audience.name}"
                                 readonly
                               />
                             </div>
@@ -295,7 +282,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Age:"
-                                value="${passenger.age}"
+                                value="${audience.age}"
                                 readonly
                               />
                             </div>
@@ -306,7 +293,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Gender:"
-                                value="${passenger.gender}"
+                                value="${audience.gender}"
                                 readonly
                               />
                             </div>
@@ -315,7 +302,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Preference:"
-                                value="${passenger.className}"
+                                value="${audience.className}"
                                 readonly
                               />
                             </div>
@@ -326,7 +313,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Price:"
-                                value="${passenger.price}"
+                                value="${audience.price}"
                                 readonly
                               />
                             </div>
@@ -335,7 +322,7 @@
                                 type="text"
                                 class="form-control"
                                 placeholder="Seat Number:"
-                                value="${passenger.seatNumber}"
+                                value="${audience.seatNumber}"
                                 readonly
                               />
                             </div>
@@ -346,8 +333,8 @@
                   });
 
                   // Update passenger count
-                  document.getElementById("numberOfPassengers").textContent =
-                    passengers.length;
+                  document.getElementById("numberOfAudiences").textContent =
+                    audiences.length;
                 });
             })
             .catch((error) => console.error("Error fetching details:", error));

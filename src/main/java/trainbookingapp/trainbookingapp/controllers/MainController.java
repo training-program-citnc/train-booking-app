@@ -26,19 +26,19 @@ public class MainController {
     return "cancel-ticket-page.html";
   }
 
-  @GetMapping("/create-train")
-  public String createTrainPage() {
-    return "create-train-page.html";
+  @GetMapping("/create-movie")
+  public String createMoviePage() {
+    return "create-movie-page.html";
   }
 
-  @GetMapping("/delete-train")
-  public String deleteTrainPage() {
-    return "delete-train-page.html";
+  @GetMapping("/delete-movie")
+  public String deleteMoviePage() {
+    return "delete-movie-page.html";
   }
 
-  @GetMapping("/edit-train")
-  public String editTrainPage() {
-    return "edit-train-page.html";
+  @GetMapping("/edit-movie")
+  public String editMoviePage() {
+    return "edit-movie-page.html";
   }
 
   @GetMapping("/forgot-password")
@@ -46,9 +46,9 @@ public class MainController {
     return "forgot-password-page.html";
   }
 
-  @GetMapping("/passanger-details")
+  @GetMapping("/audience-details")
   public String passangerDetailsPage() {
-    return "passanger-details-page.html";
+    return "audience-details-page.html";
   }
 
   @GetMapping("/payment")
@@ -66,9 +66,9 @@ public class MainController {
     return "search-booked-ticket-details-page.html";
   }
 
-  @GetMapping("/search-train")
+  @GetMapping("/search-movie")
   public String ticketSearchPage() {
-    return "search-train.html";
+    return "search-movie.html";
   }
 
   @GetMapping("/user-dashboard")

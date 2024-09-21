@@ -9,11 +9,11 @@ public class Ticket {
   @Id
   String pnr;
 
-  String train_id;
+  String movie_id;
   String method;
   int amount;
   String email;
-  String passenger_mobile_number;
+  String audience_mobile_number;
 
   public String getPnr() {
     return pnr;
@@ -23,12 +23,12 @@ public class Ticket {
     this.pnr = pnr;
   }
 
-  public String getTrainId() {
-    return train_id;
+  public String getMovieId() {
+    return movie_id;
   }
 
-  public void setTrainId(String train_id) {
-    this.train_id = train_id;
+  public void setMovieId(String movie_id) {
+    this.movie_id = movie_id;
   }
 
   public String getMethod() {
@@ -55,11 +55,11 @@ public class Ticket {
     this.email = email;
   }
 
-  public String getPassengerMobileNumber() {
-    return passenger_mobile_number;
+  public String getAudienceMobileNumber() {
+    return audience_mobile_number;
   }
 
-  public void setPassengerMobileNumber(String passenger_mobile_number) {
-    this.passenger_mobile_number = passenger_mobile_number;
+  public void setAudienceMobileNumber(String audience_mobile_number) {
+    this.audience_mobile_number = audience_mobile_number;
   }
 }

@@ -11,10 +11,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <style>
-      body{
-          background-color: #c7ffd853;
+      body {
+        background-color: #c7ffd853;
       }
-      </style>
+    </style>
   </head>
   <body>
     <div class="container">
@@ -23,52 +23,31 @@
           <center>
             <br />
             <br />
-            <h3>Provide train details to view the tickets booked</h3>
+            <h3>Provide movie details to view the tickets booked</h3>
           </center>
           <form id="ticketSearchForm">
             <div class="form-group">
-              <label for="trainId">Train ID:</label>
-              <input type="text" class="form-control" id="trainId" required />
+              <label for="movieId">Movie ID:</label>
+              <input type="text" class="form-control" id="movieId" required />
             </div>
             <div class="form-group">
-              <label for="from">From:</label>
+              <label for="from">Location:</label>
               <div class="dropdown">
                 <button
                   class="btn btn-default dropdown-toggle"
                   type="button"
-                  id="fromDropdown"
+                  id="location"
                   data-toggle="dropdown"
                 >
-                  Select Station
+                  Select Location
                   <span class="caret"></span>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="fromDropdown">
-                  <li><a href="#" class="fromStation">Chennai</a></li>
-                  <li><a href="#" class="fromStation">Bangalore</a></li>
-                  <li><a href="#" class="fromStation">Delhi</a></li>
-                  <li><a href="#" class="fromStation">Mumbai</a></li>
-                  <li><a href="#" class="fromStation">Kerala</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="to">To:</label>
-              <div class="dropdown">
-                <button
-                  class="btn btn-default dropdown-toggle"
-                  type="button"
-                  id="toDropdown"
-                  data-toggle="dropdown"
-                >
-                  Select Station
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="toDropdown">
-                  <li><a href="#" class="toStation">Chennai</a></li>
-                  <li><a href="#" class="toStation">Bangalore</a></li>
-                  <li><a href="#" class="toStation">Delhi</a></li>
-                  <li><a href="#" class="toStation">Mumbai</a></li>
-                  <li><a href="#" class="toStation">Kerala</a></li>
+                <ul class="dropdown-menu" aria-labelledby="location">
+                  <li><a href="#" class="location">Chennai</a></li>
+                  <li><a href="#" class="location">Bangalore</a></li>
+                  <li><a href="#" class="location">Delhi</a></li>
+                  <li><a href="#" class="location">Mumbai</a></li>
+                  <li><a href="#" class="location">Kerala</a></li>
                 </ul>
               </div>
             </div>
@@ -98,32 +77,24 @@
     </div>
     <script>
       $(document).ready(function () {
-        let selectedFrom = "";
-        let selectedTo = "";
+        let location = "";
 
-        $(".fromStation").click(function () {
-          selectedFrom = $(this).text();
-          $("#fromDropdown").html(
-            selectedFrom + ' <span class="caret"></span>'
-          );
-        });
-
-        $(".toStation").click(function () {
-          selectedTo = $(this).text();
-          $("#toDropdown").html(selectedTo + ' <span class="caret"></span>');
+        $(".location").click(function () {
+          location = $(this).text();
+          $("#location").html(location + ' <span class="caret"></span>');
         });
       });
 
       $("#ticketSearchForm").on("submit", function (event) {
         event.preventDefault();
 
-        const trainId = $("#trainId").val();
+        const movieId = $("#movieId").val();
         // const from = $("#fromDropdown").text().trim();
         // const to = $("#toDropdown").text().trim();
         // const date = $("#date").val();
         // const time = $("#time").val();
 
-        window.location.href = "/view-booked-ticket?trainId=" + trainId;
+        window.location.href = "/view-booked-ticket?movieId=" + movieId;
       });
 
       // function displayTickets(tickets) {

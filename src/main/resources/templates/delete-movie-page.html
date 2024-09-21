@@ -78,18 +78,18 @@
 
           <div class="card bg-glass">
             <div class="card-body px-4 py-5 px-md-5">
-              <form id="deleteTrainForm">
+              <form id="deleteMovieForm">
                 <div class="row">
                   <div class="col-md-12">
                     <center>
-                      <h1>Delete Train</h1>
+                      <h1>Delete Movie</h1>
                     </center>
                     <div class="form-group">
-                      <label for="trainName">Train Number:</label>
-                      <input type="text" class="form-control" id="trainName" />
+                      <label for="movieName">Movie Number:</label>
+                      <input type="text" class="form-control" id="movieName" />
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">
-                      Delete Train
+                      Delete Movie
                     </button>
                   </div>
                 </div>
@@ -102,32 +102,32 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const form = document.querySelector("#deleteTrainForm");
+        const form = document.querySelector("#deleteMovieForm");
 
         form.addEventListener("submit", function (e) {
           e.preventDefault();
-          const trainId = document.getElementById("trainName").value;
+          const movieId = document.getElementById("movieName").value;
 
-          if (trainId) {
-            const query = new URLSearchParams({ trainId: trainId });
-            fetch(`/api/delete-train?${query.toString()}`, {
+          if (movieId) {
+            const query = new URLSearchParams({ movieId: movieId });
+            fetch(`/api/delete-movie?${query.toString()}`, {
               method: "GET",
             })
               .then((response) => response.json())
               .then((data) => {
                 if (data.status === 200) {
-                  alert("Train deleted successfully");
+                  alert("Movie deleted successfully");
                   window.location.href = "admin-dashboard";
                 } else {
-                  alert("Train not found");
+                  alert("Movie not found");
                 }
               })
               .catch((error) => {
-                console.error("Error deleting train:", error);
-                alert("Error deleting train");
+                console.error("Error deleting movie:", error);
+                alert("Error deleting movie");
               });
           } else {
-            alert("Please enter train number");
+            alert("Please enter movie number");
           }
         });
       });

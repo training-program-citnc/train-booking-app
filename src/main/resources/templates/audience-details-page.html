@@ -69,15 +69,15 @@
                     <div class="text-center">
                       <img
                         src="train_image.jpg"
-                        style="width: 185px;"
+                        style="width: 185px"
                         alt="logo"
                       />
                       <h4 class="mt-1 mb-5 pb-1">
-                        You are in the Passenger Summary Page
+                        You are in the Audience Summary Page
                       </h4>
                     </div>
 
-                    <h2>Passenger Details</h2>
+                    <h2>Audience Details</h2>
                     <div id="class-summary"></div>
                     <form id="passenger-form">
                       <div class="form-group">
@@ -98,7 +98,7 @@
                           required
                         />
                       </div>
-                      <div id="passenger-details-container"></div>
+                      <div id="audience-details-container"></div>
                       <button
                         type="button"
                         class="btn btn-primary"
@@ -109,10 +109,12 @@
                     </form>
                   </div>
                 </div>
-                <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                <div
+                  class="col-lg-6 d-flex align-items-center gradient-custom-2"
+                >
                   <div class="text-white px-3 py-4 p-md-5 mx-md-4">
                     <h2 class="mb-4">Find Joy in the Journey</h2>
-                    <p class="mb-0" style="font-size: larger;">
+                    <p class="mb-0" style="font-size: larger">
                       Wishing you a journey filled with joy, laughter, beautiful
                       memories, new friendships and a heart full of happiness.
                       Safe travels and may each moment bring you positive Vibes
@@ -128,47 +130,47 @@
     </div>
 
     <script>
-      let passengerCount = 1;
-      const passengers = [];
+      let audienceCount = 1;
+      const audiences = [];
 
-      function insertPassengerComponent(classType) {
-        const passengerComponent = document.createElement("div");
-        passengerComponent.innerHTML = `
+      function insertAudienceComponent(classType) {
+        const audienceComponent = document.createElement("div");
+        audienceComponent.innerHTML = `
           <div class="passenger-details" data-class="${classType}">
             <hr />
-            <h4>Passenger Details (${passengerCount}) - Class ${classType}</h4>
+            <h4>Audience Details (${audienceCount}) - Class ${classType}</h4>
             <div class="form-group">
-              <label for="passenger-name-${passengerCount}">Passenger Name:</label>
-              <input type="text" class="form-control" id="passenger-name-${passengerCount}" required />
+              <label for="audience-name-${audienceCount}">Audience Name:</label>
+              <input type="text" class="form-control" id="audience-name-${audienceCount}" required />
             </div>
             <div class="form-group">
-              <label for="age-${passengerCount}">Age:</label>
-              <input type="number" class="form-control" id="age-${passengerCount}" required />
+              <label for="age-${audienceCount}">Age:</label>
+              <input type="number" class="form-control" id="age-${audienceCount}" required />
             </div>
             <div class="form-group">
-              <label for="gender-group-${passengerCount}">Gender</label>
-              <div id="gender-group-${passengerCount}">
+              <label for="gender-group-${audienceCount}">Gender</label>
+              <div id="gender-group-${audienceCount}">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender-${passengerCount}" id="male-${passengerCount}" value="male" checked>
-                  <label class="form-check-label" for="male-${passengerCount}">Male</label>
+                  <input class="form-check-input" type="radio" name="gender-${audienceCount}" id="male-${audienceCount}" value="male" checked>
+                  <label class="form-check-label" for="male-${audienceCount}">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender-${passengerCount}" id="female-${passengerCount}" value="female">
-                  <label class="form-check-label" for="female-${passengerCount}">Female</label>
+                  <input class="form-check-input" type="radio" name="gender-${audienceCount}" id="female-${audienceCount}" value="female">
+                  <label class="form-check-label" for="female-${audienceCount}">Female</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="gender-${passengerCount}" id="transgender-${passengerCount}" value="transgender">
-                  <label class="form-check-label" for="transgender-${passengerCount}">Transgender</label>
+                  <input class="form-check-input" type="radio" name="gender-${audienceCount}" id="transgender-${audienceCount}" value="transgender">
+                  <label class="form-check-label" for="transgender-${audienceCount}">Transgender</label>
                 </div>
               </div>
             </div>
           </div>`;
-        const passengerDetailsContainer = document.querySelector(
-          "#passenger-details-container"
+        const audienceDetailsContainer = document.querySelector(
+          "#audience-details-container"
         );
-        passengerDetailsContainer.appendChild(passengerComponent);
-        passengers.push(passengerComponent);
-        passengerCount++;
+        audienceDetailsContainer.appendChild(audienceComponent);
+        audiences.push(audienceComponent);
+        audienceCount++;
       }
 
       document.addEventListener("DOMContentLoaded", function () {
@@ -182,11 +184,11 @@
           if (seats.length > 0) {
             classSummary += `
               <li>
-                Class ${classType}: ${seats.length} passenger(s)
+                Class ${classType}: ${seats.length} audience(s)
               </li>
             `;
             seats.forEach(() => {
-              insertPassengerComponent(classType);
+              insertAudienceComponent(classType);
             });
           }
         });
@@ -194,43 +196,43 @@
         document.getElementById("class-summary").innerHTML = classSummary;
       });
 
-      function getPassengerDetails() {
-        const passengerDetails = [];
-        passengers.forEach((passenger, index) => {
-          const passengerName = passenger.querySelector(
-            `#passenger-name-${index + 1}`
+      function getAudienceDetails() {
+        const audienceDetails = [];
+        audiences.forEach((audience, index) => {
+          const audienceName = audience.querySelector(
+            `#audience-name-${index + 1}`
           ).value;
-          const age = passenger.querySelector(`#age-${index + 1}`).value;
-          const gender = passenger.querySelector(
+          const age = audience.querySelector(`#age-${index + 1}`).value;
+          const gender = audience.querySelector(
             `input[name="gender-${index + 1}"]:checked`
           ).value;
           const classType =
-            passenger.querySelector(".passenger-details").dataset.class;
+            audience.querySelector(".passenger-details").dataset.class;
 
-          passengerDetails.push({
-            passengerName,
+          audienceDetails.push({
+            audienceName,
             age,
             gender,
             classType,
           });
         });
-        console.log(passengerDetails);
-        return passengerDetails;
+        console.log(audienceDetails);
+        return audienceDetails;
       }
 
       function handleSubmit() {
         const email = document.getElementById("email").value;
         const mobileNumber = document.getElementById("mobile-number").value;
-        const passengerDetails = getPassengerDetails();
+        const audienceDetails = getAudienceDetails();
         const searchParams = new URLSearchParams(window.location.search);
         const bookedSeatsByClass = searchParams.get("bookedSeatsByClass");
-        const trainId = searchParams.get("trainId");
+        const movieId = searchParams.get("movieId");
 
         const queryString = $.param({
-          trainId: trainId,
+          movieId: movieId,
           email: email,
           mobileNumber: mobileNumber,
-          passengerDetails: JSON.stringify(passengerDetails),
+          audienceDetails: JSON.stringify(audienceDetails),
           bookedSeatsByClass: bookedSeatsByClass,
         });
         window.location.href = `payment?${queryString}`;

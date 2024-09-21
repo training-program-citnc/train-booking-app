@@ -13,6 +13,8 @@
     <script>
       function logout() {
         localStorage.removeItem("aadhar");
+        localStorage.removeItem("movie_number");
+        localStorage.removeItem("role");
         window.location.href = "/";
       }
     </script>
@@ -84,8 +86,8 @@
           <button type="button" class="btn btn-primary">Book Tickets</button>
         </a> -->
 
-        <a th:href="@{search-train}">
-          <button type="button" class="btn btn-primary">Search Train</button>
+        <a th:href="@{search-movie}">
+          <button type="button" class="btn btn-primary">Search Movie</button>
         </a>
         <a href="cancel-ticket">
           <button type="button" class="btn btn-primary">Cancel Ticket</button>
@@ -102,7 +104,7 @@
 
     <script>
       function loadViewBookedTicketCache() {
-        const ticketNumber = localStorage.getItem("train_number");
+        const ticketNumber = localStorage.getItem("movie_number");
         const placeholder = document.querySelector(
           ".view-booked-ticket-placeholder"
         );
@@ -118,12 +120,11 @@
       }
 
       function createBookedTicketElement(
-        trainId,
+        movieId,
         pnr,
         passenger_name,
-        train_name,
-        from,
-        to,
+        movie_name,
+        location,
         date,
         time,
         seat_number,
@@ -151,24 +152,20 @@
           <h3>Booked Ticket <small class="text-muted">PNR: ${pnr}</small></h3>
           <div class="row">
             <div class="col-xs-6">
-              <small>Passenger Name:</small>
+              <small>Audience Name:</small>
               <p class="lead"><strong>${passenger_name}</strong></p>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-6">
-              <small>Train:</small>
-              <p class="lead"><strong>${train_name}</strong></p>
+              <small>Movie:</small>
+              <p class="lead"><strong>${movie_name}</strong></p>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-6">
-              <small>From:</small>
-              <p><strong>${from}</strong></p>
-            </div>
-            <div class="col-xs-6">
-              <small>To:</small>
-              <p><strong>${to}</strong></p>
+              <small>Location:</small>
+              <p><strong>${location}</strong></p>
             </div>
           </div>
           <div class="row">
@@ -196,7 +193,7 @@
                   View Booked Ticket
                 </button>
               </a>
-              <a href="book-ticket?train_number=${trainId}">
+              <a href="book-ticket?movie_number=${movieId}">
                 <button type="button" class="btn btn-default">
                   Book More
                 </button>
@@ -223,8 +220,7 @@
         pnr,
         passenger_name,
         train_name,
-        from,
-        to,
+        location,
         date,
         time,
         seat_number,
@@ -236,8 +232,7 @@
           pnr,
           passenger_name,
           train_name,
-          from,
-          to,
+          location,
           date,
           time,
           seat_number,
@@ -269,12 +264,12 @@
       }
 
       async function fetchTrainData(trainId) {
-        const endpoint = `/api/all-trains`;
+        const endpoint = `/api/all-movie`;
         const response = await fetch(endpoint).then((response) =>
           response.json()
         );
         for (const train of response) {
-          if (train.trainNumber == trainId) return train;
+          if (train.movieNumber == trainId) return train;
         }
         return -1;
       }
@@ -302,17 +297,16 @@
 
         tickets.forEach(async (ticket) => {
           const pnr = ticket.pnr;
-          const trainId = ticket.trainId;
+          const trainId = ticket.movieId;
           const train = await fetchTrainData(trainId);
           const users = await fetchUserTicketData(pnr);
 
           console.log(trainId);
 
           const adminUser = users[0]?.name;
-          const trainName = train.trainName;
+          const trainName = train.movieName;
           console.log(trainName);
-          const from = train.source;
-          const to = train.destination;
+          const location = train.location;
           const date = train.date;
           const time = train.time;
           const seats = [];
@@ -324,8 +318,7 @@
             pnr,
             adminUser,
             trainName,
-            from,
-            to,
+            location,
             date,
             time,
             seats,
