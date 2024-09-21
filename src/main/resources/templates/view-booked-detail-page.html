@@ -13,7 +13,7 @@
       body {
         background-color: #d2e0fb29;
       }
-  </style>
+    </style>
   </head>
   <body>
     <center>
@@ -214,25 +214,25 @@
       document.addEventListener("DOMContentLoaded", function () {
         const searchParams = new URLSearchParams(window.location.search);
         const pnr = searchParams.get("pnr");
-    
+
         const backBtn = document.getElementById("back-btn");
         backBtn.addEventListener("click", function () {
-          if (localStorage.getItem("aadhar")) {
+          if (localStorage.getItem("role") == "user") {
             window.location.href = "/user-dashboard";
           } else {
             window.location.href = "/admin-dashboard";
           }
         });
-    
+
         function fetchDetails() {
           fetch(`/api/get-ticket?pnr=${pnr}`)
             .then((response) => response.json())
             .then((ticketData) => {
               console.log(ticketData);
-    
+
               document.getElementById("trainId").value = ticketData.trainId;
               document.getElementById("pnrNumber").value = ticketData.pnr;
-    
+
               return fetch(
                 `/api/search-train-by-id?trainId=${ticketData.trainId}`
               )
@@ -241,9 +241,12 @@
                   document.getElementById("trainTime").value =
                     trainData.time || "NA";
                   document.getElementById("journeyDate").value = trainData.date;
-                  document.getElementById("journeyFrom").value = trainData.source;
-                  document.getElementById("journeyTo").value = trainData.destination;
-                  document.getElementById("trainName").value = trainData.trainName;
+                  document.getElementById("journeyFrom").value =
+                    trainData.source;
+                  document.getElementById("journeyTo").value =
+                    trainData.destination;
+                  document.getElementById("trainName").value =
+                    trainData.trainName;
                 });
             })
             .then(() => {
@@ -252,7 +255,8 @@
                 .then((paymentData) => {
                   document.getElementById("paymentMethod").value =
                     paymentData.method;
-                  document.getElementById("totalPrice").value = paymentData.amount;
+                  document.getElementById("totalPrice").value =
+                    paymentData.amount;
                   document.getElementById("passengerEmail").value =
                     paymentData.email;
                   document.getElementById("mobileNumber").value =
@@ -269,9 +273,9 @@
                   const passengers = Array.isArray(passengerData)
                     ? passengerData
                     : [passengerData];
-    
+
                   passengerDetailsContainer.innerHTML = "";
-    
+
                   passengers.forEach((passenger, index) => {
                     passengerDetailsContainer.innerHTML += `
                       <div class="border border-dark p-4 mb-3">
@@ -340,7 +344,7 @@
                       </div>
                     `;
                   });
-    
+
                   // Update passenger count
                   document.getElementById("numberOfPassengers").textContent =
                     passengers.length;
@@ -348,7 +352,7 @@
             })
             .catch((error) => console.error("Error fetching details:", error));
         }
-    
+
         fetchDetails();
       });
     </script>

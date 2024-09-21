@@ -86,6 +86,11 @@ public class MainController {
     return "user-register-page.html";
   }
 
+  @GetMapping("/admin-register")
+  public String adminRegisterPage() {
+    return "admin-register-page.html";
+  }
+
   @GetMapping("/view-booked-detail")
   public String viewBookedDetailPage() {
     return "view-booked-detail-page.html";
