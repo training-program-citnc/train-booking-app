@@ -1,4 +1,4 @@
-3- accept multiple classes in book-ticket                                            [resolved]
+- accept multiple classes in book-ticket                                            [resolved]
 - automatic redirect from create-ticket to user-dashboard                           [resolved]
 - undefined fields in created ticket in user-dashboard                              [resolved]
 - check box issue in passanger-details                                              [resolved]
